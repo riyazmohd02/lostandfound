@@ -1,46 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sign Up Page</title>
-<link rel="stylesheet" href="signup.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up Page</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+  <script>
+
+    
+  </script>
 </head>
+
 <body>
   <div class="app-container">
-  <div class="header">
-    <div class="logo">
-      <img src="../signup/images/logo.png" alt="Logo">
+    <div class="header">
+      <div class="logo">
+        <img src="C:\Users\riyaz.M\Downloads\logo.png" alt="Logo">
+      </div>
     </div>
-  </div>
-  <div class="heading">
-    <label for="welcome_statement" id="Welcome"> Welcome to the Lost&Found App</label>
-  </div>
-  <div class="heading2"> 
-    <label for="welcome_statement2" id="Welcome2">Please enter your details to sign up</label> 
-  </div>
-  <form id="signupForm">
-    <div class="form-group">
-      <input type="text" id="Email"  name="Email" placeholder="Enter your Email" required>
+    <div class="heading">
+      <label for="welcome_statement" id="Welcome"> Welcome to the <b> Lost&Found App</b></label>
     </div>
-    <div class="form-group">
-      <input type="password" id="password" name="password" placeholder="Enter New password">
-      <i class="fa-sharp fa-solid fa-eye" id="pweye"></i>
-        <!-- <img src="../signup/images/eye.png" alt="Toggle Password" class="hideandshow" > -->
+    <div class="heading2">
+      <label for="welcome_statement2" id="Welcome2">Please enter your details to sign up</label>
     </div>
-    <div class="form-group">
-      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm New Password">
-      <!-- <img src="../signup/images/eye.png" alt="Toggle Password" class="hideandshow1"> -->
-    </div>
-    <button type="submit" onclick="signup">Sign Up</button>
-  </form>
-  <label class="ortext"> Or </label>
+    <form id="signupForm" method="post">
+      <div class="form-group">
+        <input type="text" id="Email" name="Email" placeholder="Enter your Email" required>
+        <span id="emailError" class="error"></span>
+      </div>
+      <div class="form-group">
+        <input type="password" id="password" name="password" placeholder="Enter New password" required>
+        <i class="eye" id="togglepassword"></i>
+        <span id="passwordError" class="error"></span>
+      </div>
+      <div class="form-group">
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm New Password"
+          onclick="return checkPasswordMatch()" required>
+          <i class="eye" id="togglepassword"></i>
+           <span id="passwordError" class="error"></span>
+      </div>
+      <button type="submit" id="signUpbutton" onclick="homepage()">Sign Up</button>
+    </form>
+    <b class="ortext"> Or </b>
+    <div class="g-signin2" data-onsuccess="onSignIn">
+      <button type="google" id="signupwithGmail">
+        <b> Sign up with Gmail
+          <img src="C:\Users\riyaz.M\Desktop\LOSTAPP\images\Gicon.png" alt="gmailicon" id="G_icon">
+        </b>
 
-  <!-- Sign up with Google button -->
-  <div class="g-signin2" data-onsuccess="onSignIn">
-    <img src="../signup/images/google-removebg.png" class="gmail" id="signupwithGmail">
+      </button>
+    </div>
+
   </div>
-</div>
-  <script src="signup.js"></script>
+
+
 </body>
+
 </html>
