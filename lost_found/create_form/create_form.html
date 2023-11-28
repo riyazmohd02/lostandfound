@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="create_form.css">
+  <title>Create Form</title>
+  <style>
+    
+  </style>
+</head>
+
+<body>
+  <div class="app-container">
+    <header>
+      <div class="back-arrow" onclick="goBack()"> &#65124 </div>
+      <div>Create Form</div>
+    </header>
+
+
+    <div id="questionContainer">
+      <div class="question">
+        <label for="question" class="mandatory">Question 1</label>
+        <label>:</label>
+        <input type="text" class="rounded-text-field" placeholder="Enter your question">
+        <span class="deleteButton" onclick="deleteQuestion(this)">&#128465</span>
+      </div>
+    </div>
+
+    <div id="addQuestionBtnContainer">
+      <button id="addQuestionBtn" onclick="addQuestion()">Add Question</button>
+    </div>
+
+    <div id="submitBtnContainer">
+      <button id="submitBtn" onclick="showConfirmationPopup()">Submit</button>
+    </div>
+
+
+    <div id="errorPopup" class="errorpopup">
+      Please fill in the current question before adding a new one.
+    </div>
+
+    <div id="errorPopup1" class="errorpopup1">
+      Please fill in the question form!...
+    </div>
+  </div>
+
+  <div id="confirmationPopup" class="popup">
+    <div class="popup-content">
+      <h2>Success</h2>
+      <p>Successfully submitted the form! </p>
+      <div class="popup-buttons">
+        <button onclick="ok()">OK</button>
+      </div>
+    </div>
+  </div>
+  <script src="create_form.js"></script>
+
+</body>
+
+</html>

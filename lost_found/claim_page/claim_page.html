@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <link rel="stylesheet" href="claim_page.css">
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <div class="app-container">
+    <div class="header">
+      <div class="back-arrow" onclick="goBack()"> &#65124 </div>
+      <div class="header-image">
+        <img src="../Images/logo.png" alt="Logo Image">
+      </div>
+      <div class="menu-button" onclick="openMenu()">&#9776;</div>
+
+
+
+      <div class="sidebar" id="mySidebar">
+        <table>
+          <tr>
+            <td href="#" onclick="my_profile()"><a>My Profile</a></td>
+          </tr>
+          <tr>
+            <td href="#" onclick="my_post()"><a>My Posts</a></td>
+          </tr>
+          <tr>
+            <td href="#" onclick="showConfirmationPopup()"><a>Logout</a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="gallery">
+      <img src="../Images/airpod.png" alt="Image 1" onclick="showImagePopup('../Images/airpod.png')">
+    </div>
+
+
+
+    <div class="content-container">
+      <div class="header-image-below">
+        <h2>Found this air-pods near iLabs</h2>
+        <div class="location-info">
+          <div class="location-icon">&#128205;</div>
+          <div class="location-text">JNTU Kukatpally, HYD</div>
+          <div class="date-info">30-10-2023 16:40PM</div>
+        </div>
+      </div>
+      <hr class="line-below-header">
+
+
+      <div class="product-details">
+        <p>Category: Electronic</p>
+        <p>Color: White</p>
+        <p>Description: I found this AirPods in the Cafeteria of Ilabs. It is in white color with red color pouch
+          cover.</p>
+      </div>
+      <div class="claim-button-container">
+        <button class="claim-button" onclick="claimRedirect()">Claim</button>
+      </div>
+    </div>
+
+    <!-- Confirmation Popup -->
+    <div id="confirmationPopup" class="popup">
+      <div class="popup-content">
+        <h2>Confirm Logout</h2>
+        <p>Are you sure want to logout from this device?</p>
+        <div class="popup-buttons">
+          <button onclick="logout()">Yes</button>
+          <button onclick="hideConfirmationPopup()">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="claim_page.js"> </script>
+
+</body>
+
+</html>

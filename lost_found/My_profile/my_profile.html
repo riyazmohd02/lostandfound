@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile Page</title>
+
+  <link rel="stylesheet" href="my_profile.css">
+</head>
+
+<body>
+
+
+  <div class="container">
+    <div class="header">
+      <header>
+        <div class="back-arrow" onclick="goBack()">
+          &#65124 <!-- Unicode character for left arrow -->
+        </div>
+        <div><i>My Profile</i></div>
+      </header>
+    </div>
+    <div class="profile">
+      <div class="profile-image">
+        <img id="profilePicture" src="../Images/2.png" alt="Profile Picture">
+        <label for="editImage" class="edit-icon">
+          <i class="fas fa-edit"></i>
+        </label>
+        <input type="file" id="editImage" name="editImage" accept="image/*" style="display: none;">
+      </div>
+
+
+      <div class="form-group">
+        <div id="fn">
+          <label for="firstName"><b>First Name:</b><i class="fas fa-pencil"></i></label>
+        </div>
+        <input type="text" class="form-control" placeholder="Enter First Name" name="firstName" id="firstName"
+          required />
+      </div>
+      <div class="form-group">
+        <div id="ln">
+          <label for="lastName"><b>Last Name:</b></label>
+        </div>
+        <input type="text" class="form-control" placeholder="Enter Last Name" name="lastName" id="lastName" required />
+      </div>
+      <div class="form-group">
+        <div id="eml">
+          <label for="email"><b>Email:</b></label>
+        </div>
+        <input type="text" class="form-control" placeholder="Enter Email" name="email" id="email" required />
+      </div>
+      <div class="form-group">
+        <div id="phn">
+          <label for="phone"><b>Phone Number:</b></label>
+        </div>
+        <input type="text" class="form-control" placeholder="Enter Phone Number" name="phone" id="phone" required />
+      </div>
+      <div class="form-group">
+        <div id="gen">
+          <label for="gender"><b>Gender:</b></label>
+        </div>
+        <select class="form-control" name="gender" id="gender" required>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <div id="cntr">
+          <label for="countryRegion"><b>Country/Region:</b></label>
+        </div>
+        <input type="text" class="form-control" placeholder="Enter Country/Region" name="countryRegion"
+          id="countryRegion" required />
+      </div>
+      <button type="submit" class="btn btn-primary registerbtn">Save Changes</button>
+      <div class="confirmation-message" id="confirmationMessage">
+
+      </div>
+    </div>
+
+    <script src="my_profile.js"></script>
+</body>
+
+</html>

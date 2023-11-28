@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <link rel="stylesheet" href="lost_item.css">
+
+</head>
+
+<body>
+    <div class="app-container">
+        <div class="header">
+            <div class="back-button" onclick="goBack()">&#65124</div>
+            <div class="header-image">
+                <img src="../Images/logo.png" alt="Logo Image">
+              </div>
+            <div class="header-text">Report a Lost Item</div>
+            <div class="menu-button" onclick="openMenu()">&#9776;</div>
+        </div>
+
+
+        <div class="sidebar" id="mySidebar">
+            <table>
+                <tr>
+                    <td><a href="../my_profile/my_profile.html">My Profile</a></td>
+                </tr>
+                <tr>
+                    <td><a href="../MyPost/mypost.html">My Posts</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#" onclick="showConfirmationPopup()">Logout</a></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="form-container">
+            <label for="category" class="mandatory">Category</label>
+            <!-- Replace the input text box with a select dropdown -->
+            <select id="category" class="rounded-drop-down" name="category">
+                <option value="" disabled selected>Select category</option>
+                <option value="electronics">Electronics</option>
+                <option value="clothing">Clothing</option>
+                <option value="accessories">Accessories</option>
+                <!-- Add more categories as needed -->
+            </select>
+            <p id="category-error" class="error-message"></p>
+        </div>
+
+
+        <div class="form-container">
+
+            <label for="location">Location </label>
+
+            <input type="text" id="location" name="location" class="rounded-text-field" placeholder="Select location"
+                onkeypress="return allowAlphabetsOnly(event)">
+
+
+        </div>
+
+        <div class="form-container">
+            <label for="datepicker">Date</label>
+            <input type="date" class="date" id="datepicker">
+        </div>
+
+        <div class="form-container">
+            <label for="color">Color </label>
+            <input type="text" id="color" name="color" class="rounded-text-field" placeholder="Enter the color"
+                onkeypress="return allowAlphabetsOnly(event)">
+        </div>
+        <div class="form-container">
+            <label for="description" class="mandatory">Description</label>
+            <textarea id="description" class="rounded-text-area" name="description" rows="4" cols="45"
+                placeholder="Describe the item you have found" required="required"></textarea>
+            <p id="description-error" class="error-message"></p>
+
+        </div>
+
+        <div class="form-container">
+            <label>Upload Image</label>
+            <div class="Upload">
+                <img type="Image" id="img1" src="../Images/cam.png" alt="Image"
+                    onclick="document.getElementById('file-input1').click();">
+                <input type="file" class="file-input" id="file-input1" accept="image/*" onchange="uploadImage1()">
+            </div>
+            <div class="Upload" id="image2">
+                <img type="Image" id="img2" src="../Images/cam.png" alt="Image"
+                    onclick="document.getElementById('file-input2').click();">
+                <input type="file" class="file-input" id="file-input2" accept="image/*" onchange="uploadImage2()">
+            </div>
+            <div class="Upload" id="image3">
+                <img type="Image" id="img3" src="../Images/cam.png" alt="Image"
+                    onclick="document.getElementById('file-input3').click();">
+                <input type="file" class="file-input" id="file-input3" accept="image/*" onchange="uploadImage3()">
+            </div>
+        </div>
+
+        <div class="submit">
+            <input type="submit" id="submit" onclick="validateForm()">
+        </div>
+
+    </div>
+    <div class="popup" id="popup">
+        <img src="../Images/tick2.jpg">
+        <h2>Thank you !</h2>
+        <p> Your details has been successfully submitted. Thanks! </p>
+        <button type="button" onclick="closePopup()">Ok </button>
+
+    </div>
+    </div>
+
+
+
+    <!-- Confirmation Popup -->
+    <div id="confirmationPopup" class="logout_popup">
+        <div class="logout_popup-content">
+            <h2>Confirm Logout</h2>
+            <p>Are you sure want to logout from this device?</p>
+            <div class="logout_popup-buttons">
+                <button onclick="logout()">Yes</button>
+                <button onclick="hideConfirmationPopup()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="lost_item.js">
+
+    </script>
+    </div>
+</body>
+
+</html>

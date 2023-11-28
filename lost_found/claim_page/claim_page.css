@@ -1,0 +1,196 @@
+.app-container {
+  width: 400px;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow-y: auto;
+  /* Add this line to enable vertical scrolling */
+  max-height: 630px;
+  height: 630px;
+  /* Set the maximum height for scrollability */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: #CCE3F5;
+  color: black;
+  font-size: 30px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+  position: relative;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.back-arrow {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.header-image img {
+  max-width: 20%;
+  height: auto;
+  display: inline-block;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.menu-button {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.sidebar {
+  width: 100px;
+  position: absolute;
+  background-color: white;
+  overflow-y: auto;
+  transition: 0.5s;
+  z-index: 1;
+  display: none;
+  top: 50px;
+  right: 0;
+}
+
+.content-container {
+  padding: 20px;
+}
+
+
+.sidebar table {
+  width: 100%;
+}
+
+.sidebar td {
+  border: 1px solid black;
+  border-width: 1px;
+  padding: 3px;
+  text-align: center;
+  font-size: 10px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: black;
+}
+
+.sidebar td:hover {
+  color: black;
+  background-color: rgb(217, 216, 216);
+  cursor: pointer;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 450.5px;
+  width: 400px;
+  height: 630px;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  border-radius: 5px;
+}
+
+.popup-content {
+  background-color: #fff;
+  width: 300px;
+  padding: 20px;
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popup h2 {
+  margin-top: 0;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.popup-buttons button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #CCE3F5;
+  border: none;
+}
+
+.popup {
+  z-index: 1000;
+}
+
+.gallery {
+  text-align: center;
+  margin-top: 2px;
+  margin-left: 0px;
+}
+
+.gallery img {
+  width: 100%;
+  max-width: 100%;
+  height: 200px;
+
+}
+
+.location-info {
+  display: flex;
+  align-items: center;
+  color: gray;
+  font-size: 12px;
+
+}
+
+.location-icon {
+  font-size: 12px;
+  margin-right: 8px;
+}
+
+.date-info {
+  float: right;
+  color: gray;
+  padding-left: 100px;
+}
+
+.line-below-header {
+  width: 100%;
+  border: 1px solid #ada8a8;
+  margin-top: 10px;
+}
+
+.claim-button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.claim-button {
+  background-color: #4c82af;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 100px;
+  margin: 20px;
+  cursor: pointer;
+}

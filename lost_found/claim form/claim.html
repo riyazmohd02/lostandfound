@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claim Form</title>
+  <link rel="stylesheet" href="claim.css">
+</head>
+<body>
+  <div class="app-container">
+    <div class="header">  
+      <div class="back-arrow" onclick="goBack()">
+        &#65124 <!-- Unicode character for left arrow -->
+      </div>
+      <h1 class="page-title">Claim Form</h1> 
+    </div>
+    <div class="container">
+      <h2 class="heading">Answer the below questions to claim your item</h2>
+      <form action="#" method="post" onsubmit="return redirectToHome()">
+        <div class="question">
+          <div class="question-number">Question 1</div>
+          <div class="question-text">What is the color of your mobile?</div>
+          <input type="text" id="color" name="color" class="answer-input" placeholder="Your answer" required>
+        </div>
+
+        <div class="question">
+          <div class="question-number">Question 2</div>
+          <div class="question-text">Which mobile have you lost?</div>       
+          <input type="text" id="lostMobile" name="lostMobile" class="answer-input" placeholder="Your answer" required>
+        </div>
+
+        <button type="submit" class="submit-button">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="claim.js"></script>
+</body>
+</html>
