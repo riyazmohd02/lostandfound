@@ -1,0 +1,84 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  max-width: 370px;
+  margin: 0px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  background-color: #cce3f5;
+  color: black;
+  font-size: 30px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  position: relative;
+  margin-top: -20px;
+  margin-left: -20px;
+  margin-right: -20px;
+  border-radius: 5px;
+  padding-right: 140px;
+}
+
+.back-button {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.post {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  margin-left: -531px;
+}
+
+.post-image {
+  width: 100px; /* Adjust the size as needed */
+  height: auto;
+  margin-right: 10px;
+  margin-left: 540px;
+}
+
+.popup-content {
+  text-align: center;
+}
+
+.popup-image {
+  width: 100%; /* Adjust the width as needed */
+  max-height: 200px; /* Adjust the maximum height as needed */
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.post-description {
+  flex-grow: 1;
+  margin-left: 650px;
+  margin-top: -70px;
+}
+
+.registerbtn {
+  background-color: #04aa6d;
+  color: white;
+  padding: 8px 10px;
+  border: none;
+  /* cursor: pointer; */
+  border-radius: 5px;
+  font-size: 14px;
+  margin-left: 300px;
+}
+
+/* .registerbtn:hover {
+    background-color: #045e44;
+  } */

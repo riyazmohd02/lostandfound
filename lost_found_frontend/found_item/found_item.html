@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <link rel="stylesheet" href="found_item.css">
+
+</head>
+
+<body>
+  <div class="app-container custom-scrollbar">
+    <div class="header">
+      <div class="back-button" onclick="goBack()">&#65124</div>
+      <div class="header-text">Report a Found Item</div>
+      <div class="menu-button" onclick="openMenu()">&#9776;</div>
+
+      <div class="sidebar" id="mySidebar">
+        <div class="sidebar_div" href="#" onclick="my_profile()">My Profile</div>
+        <div class="sidebar_div" href="#" onclick="my_post()">My Posts</div>
+        <div class="sidebar_div" href="#" onclick="showConfirmationPopup()">Logout</div>
+      </div>
+    </div>
+    <div class="content-container">
+      <div class="form-container">
+        <label for="category" class="mandatory">Category
+          <!-- <span>
+            <div class="tooltip">i
+              <span class="tooltiptext">Provide the item category from the dropdown</span>
+            </div>
+          </span> -->
+        </label>
+        <!-- Replace the input text box with a select dropdown -->
+        <select id="category" class="rounded-drop-down" name="category">
+          <option value="" disabled selected>Select category</option>
+          <option value="electronics">Electronics</option>
+          <option value="clothing">Clothing</option>
+          <option value="accessories">Accessories</option>
+          <!-- Add more categories as needed -->
+        </select>
+        <p id="category-error" class="error-message"></p>
+      </div>
+
+      <div class="form-container">
+        <label for="location" class="mandatory">Location
+          <!-- <span>
+            <div class="tooltip">i
+              <span class="tooltiptext">Provide the location where you have found the item</span>
+            </div>
+          </span> -->
+        </label>
+        <input type="text" class="rounded-text-field" id="location" name="location" placeholder="Enter location">
+        <p id="location-error" class="error-message"></p>
+      </div>
+
+      <div class="form-container">
+        <label for="date">Date
+          <!-- <span>
+            <div class="tooltip">i
+              <span class="tooltiptext">Provide the date when you have found the item</span>
+            </div>
+          </span> -->
+        </label>
+        <!-- <input type="date" class="rounded-text-field" id="datepicker" max="9999-12-31" maxlength="10"> -->
+        <input type="date" class="rounded-text-field" id="datepicker" max="9999-12-31" min="2000-01-01" maxlength="10">
+
+        <p></p>
+      </div>
+
+      <div class="form-container">
+        <label for="color">Color
+          <!-- <span>
+            <div class="tooltip">i
+              <span class="tooltiptext">Provide the color of the item you have found</span>
+            </div>
+          </span> -->
+        </label>
+        <input type="text" class="rounded-text-field" id="color" name="color" placeholder="Enter the color">
+      </div>
+
+      <p></p>
+
+      <div class="form-container">
+        <label for="description" class="mandatory">Description
+          <!-- <span>
+            <div class="tooltip">i
+              <span class="tooltiptext">Describe about the item you have found</span>
+            </div>
+          </span> -->
+        </label>
+        <textarea id="description" class="rounded-text-area" name="description" rows="4" cols="45"
+          placeholder="Describe the item you have found" maxlength="200"></textarea>
+        <p id="description-error" class="error-message"></p>
+      </div>
+
+
+      <div class="image-preview-container" id="image-preview-container"></div>
+
+      <div class="upload-container">
+        <!-- Add an upload icon -->
+        <label for="file-input" id="upload-button">Upload Image
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+          </path>
+        </label>
+        <input type="file" id="file-input" accept="image/*" multiple onchange="handleMultipleFileSelect(event)">
+      </div>
+
+      <div class="upload-container">
+        <button id="next-button" onclick="validateForm()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmation Popup -->
+  <div id="confirmationPopup" class="popup">
+    <div class="popup-content">
+      <h2>Confirm Logout</h2>
+      <p>Are you sure want to logout from this device?</p>
+      <div class="popup-buttons">
+        <button onclick="logout()">Yes</button>
+        <button onclick="hideConfirmationPopup()">No</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="found_item.js">
+
+  </script>
+  </div>
+</body>
+
+</html>

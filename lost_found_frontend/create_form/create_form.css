@@ -1,0 +1,278 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0.01px;
+}
+
+.app-container {
+  max-width: 400px;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow-y: auto;
+  /* Add this line to enable vertical scrolling */
+  max-height: 630px;
+  height: 630px;
+  /* Set the maximum height for scrollability */
+  border-color: #ccc;
+  scrollbar-width: thin;
+  scrollbar-color: #CCE3F5 #fff;
+}
+
+.header {
+  width: 380px;
+  background-color: #CCE3F5;
+  color: black;
+  font-size: 24px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  height: 24px;
+  position: fixed;
+  margin-bottom: 15px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.back-button {
+  font-size: 30px;
+  cursor: pointer;
+  margin-right: 50px;
+}
+
+.header-text {
+  margin-left: 45px;
+}
+
+.menu-button {
+  font-size: 24px;
+  cursor: pointer;
+  margin-left: 85px;
+}
+
+.sidebar {
+  width: 100px;
+  position: absolute;
+  background-color: rgb(247, 246, 246);
+  overflow-y: auto;
+  transition: 0.5s;
+  z-index: 1;
+  display: none;
+  top: 44px;
+  right: 0;
+}
+
+.content-container {
+  padding: 25px;
+  padding-top: 50px;
+}
+
+.sidebar_div {
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border: black;
+  font-size: 15px;
+}
+
+.sidebar_div:hover {
+  background-color: #e4e4e4;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 458px;
+  width: 30.4%;
+  height: 630px;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  border-radius: 6px;
+}
+
+.popup-content {
+  background-color: #fff;
+  width: 300px;
+  padding: 20px;
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popup h2 {
+  margin-top: 0;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.popup-buttons button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #CCE3F5;
+  border: none;
+}
+
+.popup {
+  z-index: 1000;
+}
+
+
+.rounded-text-field {
+  width: 150px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 12px;
+}
+
+#questionContainer {
+  width: px;
+  /* Adjust the width as needed */
+  margin: 20px auto;
+  font-size: 12px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  /* Align items vertically */
+
+}
+
+.question {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+
+}
+
+.question input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.deleteButton {
+  cursor: pointer;
+  color: #ff0000;
+  font-size: 20px;
+}
+
+#addQuestionBtnContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#addQuestionBtn {
+  background-color: #4c82af;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+}
+
+#submitBtnContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+#submitBtn {
+  background-color: #4c82af;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+}
+
+.submit_popup {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 458px;
+  width: 30.4%;
+  height: 630px;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  border-radius: 6px;
+}
+ 
+.submit_popup-content {
+  background-color: #fff;
+  width: 300px;
+  padding: 20px;
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+ 
+.submit_popup h2 {
+  margin-top: 0;
+}
+ 
+.submit_popup-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+ 
+.submit_popup-buttons button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #CCE3F5;
+  border: none;
+}
+
+.submit_popup {
+  z-index: 1000;
+}
+
+.mandatory::after {
+  content: " *";
+  color: red;
+}
+
+.errorpopup, .errorpopup1 {
+  display: none;
+  position: fixed;
+  top: 50px;
+  right: 458px;
+  background-color: #FF5555;
+  /* Changed the background color to red */
+  color: white;
+  padding: 15px;
+  border-radius: 3px;
+  z-index: 9999;
+  font-size: 10px;
+}

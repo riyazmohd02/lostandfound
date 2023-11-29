@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up Page</title>
+<link rel="stylesheet" href="signup.css">
+</head>
+
+<body>
+  <div class="app-container custom-scrollbar">
+    <div class="header">
+      <div class="header-image">
+        <img src="../Images/logo.png" alt="Logo Image">
+      </div>
+      <div class="header-text">Signup </div>
+    </div>
+
+    <div class="content-container">
+      <div class="form-container">
+        <label for="firstname" class="mandatory">First Name</label>
+        <input type="text" class="rounded-text-field" id="firstname" name="firstname" placeholder="Enter your first name" oninput="validateAlphabets(this)">
+        <p id="firstname-error" class="error-message"></p>
+      </div>
+
+      <div class="form-container">
+        <label for="lastname" >Last Name
+        </label>
+        <input type="text" class="rounded-text-field" id="lastname" name="lastname" placeholder="Enter your last name" oninput="validateAlphabets(this)">
+        <p></p>
+      </div>
+
+      <div class="form-container">
+        <label for="email" class="mandatory">Email Id
+        </label>
+        <input type="text" class="rounded-text-field" id="email" name="email" placeholder="Enter your valid email" oninput="validateEmail(this)">
+        <p id="email-error" class="error-message"></p>
+      </div>
+
+      <div class="form-container">
+        <label for="password" class="mandatory">Password
+        </label>
+        <input type="text" class="rounded-text-field" id="password" name="password" placeholder="Enter your password" maxlength="12" oninput="validatePassword(this)">
+        <p id="password-error" class="error-message"></p>
+      </div>
+
+      <div class="form-container">
+        <label for="password1" class="mandatory">Confirm Password
+        </label>
+        <input type="text" class="rounded-text-field" id="password1" name="password1" placeholder="Renter your password" maxlength="12" oninput="validatePassword1(this)">
+        <p id="password1-error" class="error-message"></p>
+      </div>
+
+      <div class="upload-container">
+        <button id="next-button" onclick="validateForm()">Create Account</button>
+      </div>
+
+    </div>
+
+  <script src="signup.js"></script>
+</body>
+</html>

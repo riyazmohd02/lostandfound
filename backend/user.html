@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontend</title>
+</head>
+
+<body>
+  <h1>User Registration</h1>
+  <form id="registrationForm">
+    <input type="text" name="first_name" placeholder="Enter First_name" required /><br /><br />
+    <input type="text" name="last_name" placeholder="Enter Last_name"  /><br /><br />
+    <input type="text" name="email" placeholder="Enter Email" required /><br /><br />
+    <input type="password" name="password" placeholder="Enter Password" required /><br /><br />
+    <input type="password" name="confirmpassword" placeholder="Enter Confirm Password" required /><br /><br />
+    <input type="submit" value="Submit" />
+  </form>
+
+  <script>
+    document.getElementById("registrationForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const formData = new FormData(event.target);
+      const userData = {};
+      formData.forEach((value, key) => {
+        userData[key] = value;
+      });
+
+      // Make a POST request to your backend
+      fetch('http://localhost:7000/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+
+      })
+
+      // Fetch all users when the page loads
+      fetch('http://localhost:7000/user')
+        .then(response => response.json())
+        .then(users => displayUsers(users))
+        .catch(error => console.error('Error fetching users:', error));
+
+
+
+      alert("user created successfuly")
+    });
+  </script>
+</body>
+
+</html>

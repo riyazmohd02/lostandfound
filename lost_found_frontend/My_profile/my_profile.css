@@ -1,0 +1,144 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  max-width: 400px;
+  margin: 0px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  background-color: #cce3f5;
+  color: black;
+  font-size: 30px;
+  padding: 16px;
+  display: flex;
+  padding-left: 135px;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  position: relative;
+  margin-top: -20px;
+  margin-left: -20px;
+  margin-right: -20px;
+  border-radius: 5px;
+}
+
+.back-arrow {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.profile {
+  margin: 0px 0;
+  padding-left: 65px;
+}
+
+.profile-image {
+  position: relative;
+}
+
+.profile-image img {
+  display: block;
+  width: 100px;
+  height: 72px;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  margin-left: 70px;
+}
+
+.edit-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 58px;
+  right: 135px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 0px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+input[type="text"],
+input[type="password"] {
+  width: 82%;
+  padding: 12px;
+  margin: 0px 0 8px 0;
+  display: inline-block;
+  border: none;
+  border-radius: 10px;
+  background: #cce3f5;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #007bff;
+  color: black;
+  font-weight: bold;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 45%;
+  opacity: 0.9;
+  border-radius: 10px;
+  margin-left: 50px;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+#gender {
+  padding-right: 176px;
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+
+  background-color: #cce3f5;
+}
+
+.input-container {
+  position: relative;
+}
+
+.with-icon {
+  padding-left: 25px; /* Space for the icon */
+}
+.pencil-icon {
+  position: absolute;
+  left: 220px;
+  top: 35%;
+  transform: translateY(-50%);
+  color: #ccc; /* Adjust the color as needed */
+}

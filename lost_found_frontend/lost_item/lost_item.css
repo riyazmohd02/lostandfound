@@ -1,0 +1,348 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0.01px;
+}
+
+
+
+.app-container {
+  max-width: 400px;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow-y: auto;
+  /* Add this line to enable vertical scrolling */
+  max-height: 630px;
+  height: 630px;
+  /* Set the maximum height for scrollability */
+  border-color: #ccc;
+  scrollbar-width: thin;
+  scrollbar-color: #CCE3F5 #fff;
+}
+
+.header {
+  width: 380px;
+  background-color: #CCE3F5;
+  color: black;
+  font-size: 24px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  height: 24px;
+  position: fixed;
+  margin-bottom: 15px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.back-button {
+  font-size: 30px;
+  cursor: pointer;
+  margin-left: -5px;
+}
+
+
+#backarrow {
+  color: black;
+  margin-right: 10px;
+}
+
+.header-image img {
+  max-width: 80px;
+  height: auto;
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: -8px;
+  margin-right: 15px;
+}
+
+.header-text {
+  margin-right: px;
+}
+
+.menu-button {
+  font-size: 24px;
+  cursor: pointer;
+  margin-left: 40px;
+}
+
+.sidebar {
+  width: 100px;
+  position: absolute;
+  background-color: rgb(247, 246, 246);
+  overflow-y: auto;
+  transition: 0.5s;
+  z-index: 1;
+  display: none;
+  top: 44px;
+  right: 0;
+}
+
+.content-container {
+  padding: 25px;
+  padding-top: 60px;
+}
+
+.sidebar_div {
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border: black;
+  font-size: 15px;
+}
+
+.sidebar_div:hover {
+  background-color: #e4e4e4;
+}
+
+
+.form-container {
+  width: 300px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.rounded-drop-down {
+  width: 320px;
+  height: 39px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 16px;
+  background-color: #d1e6f5;
+  border: 2px solid #020202;
+  cursor: pointer;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.mandatory::after {
+  content: " *";
+  color: red;
+}
+
+input {
+  font-family: verdana;
+  font-size: 9pt;
+  align-items: center;
+  justify-content: center;
+}
+
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #d1e6f5;
+  border: 2px solid #020202;
+}
+
+.error-message {
+  color: red;
+  font-size: 15x;
+  margin-top: 0px;
+}
+
+.date {
+  width: 310px;
+  /* Set the width of the text field */
+  height: 30px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #d1e6f5;
+  border-radius: 10px;
+  /* Set border-radius for curved edges */
+  padding: 5px;
+  /* Add some padding inside the text field */
+  font-size: 16px;
+  /* Set font size */
+  border: 2px solid #020202;
+  cursor: pointer;
+}
+
+.rounded-text-field {
+  width: 200px;
+  /* Set the width of the text field */
+  height: 20px;
+  /* Set the height of the text field */
+  border: 1px solid #ccc;
+  /* Set border color and style */
+  border-radius: 10px;
+  /* Set border-radius for curved edges */
+  padding: 5px;
+  /* Add some padding inside the text field */
+  font-size: 16px;
+  /* Set font size */
+}
+
+.rounded-text-area {
+  width: 317px;
+  /* Set the width of the text field */
+  border: 2px solid black;
+  /* Set border color and style */
+  border-radius: 10px;
+  font-size: 16px;
+  /* Set font size */
+  font-family: Arial, sans-serif;
+  background-color: #d1e6f5;
+}
+
+.file-input,
+#image2,
+#image3 {
+  display: none;
+}
+
+.Upload {
+  width: 95px;
+  height: 80px;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  border: 1px solid black;
+}
+
+.Upload img {
+  width: 90px;
+  height: 75px;
+  cursor: pointer;
+  position: absolute;
+}
+
+.submit {
+  width: 300px;
+  margin: 20px auto;
+}
+
+/* Style for the submit button */
+input[type="submit"] {
+  background-color: #4c9baf;
+  /* Green background color */
+  color: white;
+  /* White text color */
+  border: none;
+  /* Remove border */
+  padding: 10px 120px;
+  /* Add padding */
+  text-align: center;
+  /* Center text */
+  text-decoration: none;
+  /* Remove underline */
+  display: inline-block;
+  /* Make the button an inline block element */
+  font-size: 20px;
+  /* Set font size */
+  border-radius: 5px;
+  /* Add rounded corners */
+  cursor: pointer;
+  /* Add a cursor pointer on hover */
+}
+
+.popup {
+  width: 400px;
+  background-color: #fff;
+  border-radius: 6px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%)scale(0.2);
+  text-align: center;
+  padding: 0 30px 30px;
+  color: #333;
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s;
+  border: none;
+}
+
+.open-popup {
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%)scale(0.8);
+
+}
+
+.popup img {
+  width: 125px;
+  margin-top: -50px;
+  border-radius: 80%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.popup h2 {
+  font-size: 38px;
+  font-weight: 500;
+  margin: 30px 0 10px;
+
+}
+
+.popup button {
+  width: 100%;
+  margin-top: 50px;
+  padding: 10px 0;
+  background: #6fd649;
+  color: #fff;
+  border: 0;
+  outline: none;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+
+}
+
+/* logout popup */
+.logout_popup {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 458px;
+  width: 30.4%;
+  height: 630px;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  border-radius: 6px;
+}
+
+.logout_popup-content {
+  background-color: #fff;
+  width: 300px;
+  padding: 20px;
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.logout_popup h2 {
+  margin-top: 0;
+}
+
+.logout_popup-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.logout_popup-buttons button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #CCE3F5;
+  border: none;
+}
+
+.logout_popup {
+  z-index: 1000;
+}
