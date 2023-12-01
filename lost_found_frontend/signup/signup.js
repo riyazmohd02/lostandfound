@@ -31,7 +31,7 @@ function validatePassword(passwordField) {
   } else {
     document.getElementById('password-error').innerText = "";
   }
-  
+
 }
 
 function validatePassword1(passwordField) {
@@ -39,11 +39,34 @@ function validatePassword1(passwordField) {
   var password1Regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,12}$/;
 
   if (!password1Regex.test(password1Value)) {
-    document.getElementById('password1-error').innerText = "Invalid password. Must containe ([A-Z,a-z,0-9,@!#$*])";
+    document.getElementById('password1-error').innerText = "Invalid password. Must contain ([A-Z,a-z,0-9,@!#$*])";
   } else {
     document.getElementById('password1-error').innerText = "";
   }
-  
+
+}
+
+function togglePasswordVisibility() {
+  var passwordField = document.getElementById('password');
+  var showPasswordCheckbox = document.getElementById('showPassword');
+
+  if (showPasswordCheckbox.checked) {
+    passwordField.type = "text";
+  } else {
+    passwordField.type = "password";
+  }
+}
+
+function togglePasswordVisibility1() {
+  var passwordField1 = document.getElementById('password1');
+  var showPasswordCheckbox = document.getElementById('showPassword1');
+
+  if (showPasswordCheckbox.checked) {
+    passwordField1.type = "text";
+  } else {
+    passwordField1.type = "password";
+  }
+
 }
 
 function validateForm() {
@@ -81,17 +104,17 @@ function validateForm() {
   if (password.trim() === "") {
     document.getElementById('password-error').innerText = "Password is mandatory";
     isValid = false;
-  } 
+  }
 
   if (password1.trim() === "") {
     document.getElementById('password1-error').innerText = "Password is mandatory";
     isValid = false;
-  } 
+  }
 
   if (password !== password1) {
     document.getElementById('password1-error').innerText = "Passwords do not match";
     isValid = false;
-  } 
+  }
 
   if (isValid) {
     create_account();
@@ -106,8 +129,8 @@ function validateForm() {
     }
     else if (password1.trim() === "") {
       document.getElementById('password1').focus();
+    }
   }
-}
 }
 
 function create_account() {
