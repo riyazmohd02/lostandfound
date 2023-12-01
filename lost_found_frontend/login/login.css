@@ -16,18 +16,13 @@ body {
 
 .header-image img {
   max-width: 25%;
-  /* Ensure the image doesn't exceed its container width */
   height: auto;
-  /* Allow the image to maintain its aspect ratio */
   display: flex;
-  /* Make the image behave like an inline element */
-
 }
 
 .app-container {
   max-width: 400px;
   margin: 20px auto;
-  /* padding: 20px; */
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -41,7 +36,6 @@ body {
 
 .heading {
   font-size: 22px;
-  /* Font size for the heading */
   font-weight: bold;
   margin-top: 40px;
   text-align: center;
@@ -49,7 +43,6 @@ body {
 
 .subheading {
   font-size: 14px;
-  /* Font size for the subheading */
   color: grey;
   text-align: center;
   margin-top: 8px;
@@ -70,65 +63,50 @@ body {
 
 .input-container input {
   border: 1px solid #111010;
-  /* Add border to create a box-like appearance */
   border-radius: 5px;
-  /* Rounded corners */
   width: 80%;
   padding: 16px;
-
 }
 
-.password-toggle {
-  position: absolute;
-  right: 45px;
-  top: 15px;
-  cursor: pointer;
-  color: #ccc;
-  background: none;
-  border: none;
-  font-size: 14px;
-  text-decoration: underline;
+.forgot-show-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
-.forgot-password-link {
+.forgot-password-link,
+.show-password-link {
   text-align: center;
-  margin-left: 220px;
+  flex: 1;
 }
 
-.forgot-password-link a {
+.forgot-password-link a,
+.show-password-link a {
   text-decoration: none;
   color: #090e11;
-
 }
-
 
 .login-button {
   background-color: #77AEE1;
-  /* Log in button background color */
   color: rgb(17, 16, 16);
   border: none;
   border-radius: 10px;
   padding: 10px 20px;
   cursor: pointer;
   display: block;
-  /* Center the button */
   margin: 0 auto;
-  /* Center the button */
   margin-top: 30px;
   width: 89%;
 }
 
 .google-button {
-
   color: rgb(10, 8, 8);
   border: 1px solid black;
   border-radius: 100px;
   padding: 10px 20px;
   cursor: pointer;
   display: flex;
-  /* Center the button */
   margin: 0 auto;
-  /* Center the button */
   width: 80%;
   gap: 60px;
 }
@@ -138,8 +116,6 @@ body {
   height: auto;
   margin-right: 10px;
 }
-
-
 
 .or-divider {
   text-align: center;
@@ -161,7 +137,6 @@ body {
   margin-top: 40px;
 }
 
-
 .signup-link a {
   text-decoration: none;
   color: #71BAF3;
@@ -177,4 +152,25 @@ body {
   padding: 10px;
   border-radius: 5px;
   z-index: 9999;
+}
+
+.rounded-text-field {
+  width: 310px;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 17px;
+}
+
+.form-container {
+  width: 300px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 0px;
 }
