@@ -1,0 +1,81 @@
+create database lostandfound
+show databases
+use lostandfound
+show tables
+ 
+CREATE TABLE users (
+  user_id INT auto_increment PRIMARY KEY,
+  email VARCHAR(255),
+  password VARCHAR(255),
+  first_name VARCHAR(255),
+  last_name VARCHAR(255),
+  gender VARCHAR(255),
+  region VARCHAR(255),
+  google_id VARCHAR(255),
+  created_at TIMESTAMP
+);
+ 
+ 
+CREATE TABLE categories (
+  category_id INT PRIMARY KEY,
+  category_name VARCHAR(255)
+);
+ 
+ 
+CREATE TABLE Items_table (
+  Item_id INT PRIMARY KEY,
+  user_id INT,
+  category_id INT,
+  Item_name VARCHAR(255),
+  color VARCHAR(255),
+  brand VARCHAR(255),
+  location VARCHAR(255),
+  item_type BOOLEAN,
+  status VARCHAR(255),
+  date_found DATETIME,
+  image_url VARCHAR(255),
+  first_name VARCHAR(255),
+  last_name VARCHAR(255),
+  FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+ 
+CREATE TABLE Item_description (
+  description_Id INT PRIMARY KEY,
+  Item_id INT,
+  description VARCHAR(255),
+  FOREIGN KEY (Item_id) REFERENCES Items_table(Item_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+ 
+ 
+CREATE TABLE my_posts (
+  post_id INT PRIMARY KEY,
+  user_id INT,
+  item_id INT,
+  FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (item_id) REFERENCES Items_table(Item_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+ 
+ 
+CREATE TABLE questionForm (
+  question_Id INT PRIMARY KEY,
+  question_text VARCHAR(255),
+  question_type VARCHAR(255),
+  options VARCHAR(255),
+    item_id INT,
+  category_id INT,
+  created_at VARCHAR(255),
+  FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE ON UPDATE CASCADE,
+   FOREIGN KEY (item_id) REFERENCES Items_table(Item_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+ 
+ 
+CREATE TABLE answerForm (
+  answerId INT PRIMARY KEY,
+  question_Id INT,
+  Item_id INT,
+  answer_text VARCHAR(255),
+  created_at DATETIME,
+  FOREIGN KEY (question_Id) REFERENCES questionForm(question_Id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (Item_id) REFERENCES Items_table(Item_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
