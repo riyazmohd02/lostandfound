@@ -45,37 +45,6 @@ app.get("/user/:id", (req, res) => {
   );
 });
 
-// // POST method to create a user
-// app.post("/", [
-//   check('email').isEmail().withMessage('Invalid email address'),
-//   check('password').isLength({ min: 8, max: 12 }).withMessage('Password must be 8 to 12 characters long'),
-//   check('confirmpassword').custom((value, { req }) => {
-//     if (value !== req.body.password) {
-//       throw new Error('Passwords do not match');
-//     }
-//     return true;
-//   }),
-// ], (req, res) => {
-//   const errors = validationResult(req);
-//   console.log("result: ", req.body);
-
-//   if (!errors.isEmpty()) {
-//     return res.status(400).json({ errors: errors.array() });
-//   }
-
-//   const { first_name, last_name, email, password, confirmpassword } = req.body;
-//   const sql = "INSERT INTO user (first_name, last_name, email, password, confirmpassword) VALUES (?,?,?,?,?)";
-//   const values = [first_name, last_name, email, password, confirmpassword];
-
-//   connection.query(sql, values, (error, result) => {
-//     if (error) {
-//       console.error("Error inserting data into SQL:", error);
-//       res.status(500).json({ error: "Internal server error" });
-//     } else {
-//       res.json({ message: "User registered successfully", userId: result.insertId });
-//     }
-//   });
-// });
 // POST method to create a user
 app.post("/", [
   check('email').isEmail().withMessage('Invalid email address'),
@@ -157,6 +126,8 @@ app.delete("/user/:id", (req, res) => {
     }
   });
 });
+
+
 
 const PORT = 7000;
 app.listen(PORT, () => console.log(`Express server is running on port ${PORT}`));
