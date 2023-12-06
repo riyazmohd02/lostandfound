@@ -7,75 +7,79 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>My Profile Page</title>
   <link rel="stylesheet" href="my_profile.css">
+
+  <title>Font Awesome Icons</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
+
 <body>
-    <div class="app-container">
+  <div class="app-container">
 
-  <div class="container">
-    <div class="header">
-      <header>
-        <div class="back-arrow" onclick="goBack()">&#65124</div>
-        <div>My Profile</div>
-      </header>
-    </div>
-    <div class="profile">
-      <div class="profile-image">
-        <img id="profilePicture" src="../Images/2.png" alt="Profile Picture">
-        <label for="editImage" class="edit-icon">
-          <i class="fa fa-edit"></i>
-        </label>
-        <input type="file" id="editImage" name="editImage" accept="image/*" style="display: none;">
+    <div class="container">
+      <div class="header">
+        <header>
+          <div class="back-arrow" onclick="goBack()">&#65124</div>
+          <div>My Profile</div>
+        </header>
       </div>
-      <form action="/saveProfile" method="post" onsubmit="return validateForm()">
-
-        <div class="form-group">
-          <label for="firstName"><b>First Name:</b></label>
-          <div class="input-container">
-            <input type="text" class="form-control with-icon" placeholder="Enter First Name" name="firstName" id="firstName" required />
-            <i class="fa fa-pencil pencil-icon"></i>
-          </div>
-          <label for="firstName"><b>Last Name:</b></label>
-          <div class="input-container">
-            <input type="text" class="form-control with-icon" placeholder="Enter First Name" name="firstName" id="firstName" required />
-            <i class="fa fa-pencil pencil-icon"></i>
-          </div>
-          <label for="firstName"><b>Email:</b></label>
-          <div class="input-container">
-            <input type="text" class="form-control with-icon" placeholder="Enter First Name" name="firstName" id="firstName" required />
-            <i class="fa fa-pencil pencil-icon"></i>
-          </div>
-          <label for="firstName"><b>Phone Number:</b></label>
-          <div class="input-container">
-            <input type="text" class="form-control with-icon" placeholder="Enter First Name" name="firstName" id="firstName" required />
-            <i class="fa fa-pencil pencil-icon"></i>
-          </div>
-          <label for="firstName"><b>Gender:</b></label>
-          <div class="input-container">
-              <select class="form-control" name="gender" id="gender" required>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-                </select>
-                <!-- <input type="text" class="form-control with-icon" placeholder="Enter First Name" name="firstName" id="firstName" required /> -->
-                <!-- <i class="fa fa-pencil pencil-icon"></i> -->
-                
-            </div>
-            <label for="firstName"><b>Country/Region:</b></label>
-            <div class="input-container">
-              <input type="text" class="form-control with-icon" placeholder="Enter First Name" name="firstName" id="firstName" required />
-              <i class="fa fa-pencil pencil-icon"></i>
-            </div>
+      <div class="profile">
+        <div class="profile-image">
+          <img id="profilePicture" src="../Images/2.png" alt="Profile Picture">
+          <label for="editImage" class="edit-icon">
+            <i class="fa fa-edit"></i>
+          </label>
+          <button class="edit-profile-btn" onclick="enableEditMode()">Edit Profile</button>
+          <input type="file" id="editImage" name="editImage" accept="image/*" style="display: none;">
         </div>
-        <!-- Repeat the structure for other input fields -->
+        <form action="/saveProfile" method="post" onsubmit="return saveChanges()">
+          <div class="form-group">
+            <label for="firstName"><b>First Name </b></label>
+            <div class="input-container">
+              <input type="text" class="form-control with-icon" placeholder="Enter First Name" name="firstName"
+                id="firstName" required value="John" disabled />
+            </div>
 
-        <button type="submit" class="btn btn-primary registerbtn">Save Changes</button>
-      </form>
-      <div class="confirmation-message" id="confirmationMessage"></div>
+            <label for="LastName"><b>Last Name </b></label>
+            <div class="input-container">
+              <input type="text" class="form-control with-icon" placeholder="Enter Last Name" name="LastName"
+                id="LastName" required value="Doe" disabled />
+            </div>
 
+            <label for="Email"><b>Email </b></label>
+            <div class="input-container">
+              <input type="text" class="form-control with-icon" placeholder="Enter Email ID" name="Email" id="Email"
+                required value="john.doe@example.com" disabled />
+            </div>
+
+            <label for="Phone number"><b>Phone Number </b></label>
+            <div class="input-container">
+              <input type="text" class="form-control with-icon" placeholder="Enter Phone number" name="Phone number"
+                id="Phone number" required value="1234567890" disabled />
+            </div>
+
+            <label for="Gender"><b>Gender </b></label>
+            <div class="input-container">
+              <select class="form-control" name="gender" id="gender" required disabled>
+                <option value="" disabled>Select</option>
+                <option value="male" selected>Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <label for="Country/Region"><b>Country/Region </b></label>
+            <div class="input-container">
+              <input type="text" class="form-control with-icon" placeholder="Enter Country/Region" name="Country/Region"
+                id="Country/Region" required value="United States" disabled />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary registerbtn" id="saveChangesBtn" disabled>Save Changes</button>
+        </form>
+        <div class="confirmation-message" id="confirmationMessage"></div>
+      </div>
     </div>
-</div>
-
     <script src="my_profile.js"></script>
 </body>
 
