@@ -70,13 +70,16 @@ function togglePasswordVisibility1() {
 }
 
 function validateForm() {
+  // alert("hi")
   var firstname = document.getElementById('firstname').value;
+  var lastname = document.getElementById('lastname').value;
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
   var password1 = document.getElementById('password1').value;
 
 
   document.getElementById('firstname-error').innerText = "";
+  document.getElementById('lastname-error').innerText = "";
   document.getElementById('email-error').innerText = "";
   document.getElementById('password-error').innerText = "";
   document.getElementById('password1-error').innerText = "";
@@ -89,6 +92,7 @@ function validateForm() {
 
   if (firstname.trim() === "") {
     document.getElementById('firstname-error').innerText = "Firstname is mandatory";
+    alert("hi")
     isValid = false;
   } else {
     document.getElementById('firstname-error').innerText = ""; // Clear error when user starts typing
@@ -122,6 +126,8 @@ function validateForm() {
 
     if (firstname.trim() === "") {
       document.getElementById('firstname').focus();
+    } else if (lastname.trim() === "") {
+      document.getElementById('lastname').focus();
     } else if (email.trim() === "") {
       document.getElementById('email').focus();
     } else if (password.trim() === "") {
@@ -133,6 +139,48 @@ function validateForm() {
   }
 }
 
-function create_account() {
-  window.location.href = "../home page/home_page.html";
+function registerUser() {
+  const firstname = document.getElementById('firstname').value;
+  const lastname = document.getElementById('lastname').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const confirmpassword = document.getElementById('confirmpassword').value;
+
+  const userData = {
+    first_name: firstname,
+    last_name: lastname,
+    email: email,
+    password: password,
+    confirmpassword: confirmpassword,
+  };
+  fetch('http://localhost:7000/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userData),
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else if (response.status === 401) {
+        throw new Error('401 - Unauthorized: Invalid credentials');
+      } else if (response.status === 409) {
+        throw new Error('409 - Conflict: User already exists');
+      } else {
+        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      }
+    })
+    .then(result => {
+      console.log('User registration successful:', result);
+      alert('User registration successful!');
+
+      // Redirect to the login page
+      window.location.href = "../login/login.html";
+
+    })
+
+    .catch(error => {
+      console.error('Error during user registration: ', error);
+    })
 }

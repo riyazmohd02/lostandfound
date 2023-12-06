@@ -8,6 +8,7 @@ const connection = require("./dbconnection");
 const app = express();
 
 app.use(cors());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -18,6 +19,7 @@ app.get("/user", (req, res) => {
       console.log(err);
       res.status(500).json({ error: "Internal server error" });
     } else {
+        console.log('GET details: ',rows);
       res.send(rows);
     }
   });
@@ -46,9 +48,18 @@ app.get("/user/:id", (req, res) => {
 });
 
 // POST method to create a user
-app.post("/", [
+app.post("/register", [
   check('email').isEmail().withMessage('Invalid email address'),
-  check('password').isLength({ min: 8, max: 12 }).withMessage('Password must be 8 to 12 characters long'),
+  check('email').custom(async (value) => {
+    const emailExists = await doesEmailExist(value);
+    if (emailExists) {
+      console.error('Email already exists. Please use a different email address.');
+      throw new Error('Email already exists. Please use a different email address.');
+    }
+    console.log('Email validation passed.');
+    return true;
+  }),
+  check('password').isLength({ min: 6, max: 12 }).withMessage('Password must be 8 to 12 characters long'),
   check('confirmpassword').custom((value, { req }) => {
     if (value !== req.body.password) {
       throw new Error('Passwords do not match');
@@ -86,6 +97,20 @@ app.post("/", [
     res.status(500).json({ error: "Internal server error" });
   }
 });
+// Helper function to check if email already exists in the database
+const doesEmailExist = (email) => {
+  return new Promise((resolve, reject) => {
+    const checkEmailQuery = "SELECT * FROM user WHERE email=?";
+    connection.query(checkEmailQuery, [email], (error, result) => {
+      if (error) {
+        console.error("Error checking email in SQL:", error);
+        reject(error);
+      } else {
+        resolve(result.length > 0);
+      }
+    });
+  });
+};
 
 // PUT method to update a user by ID
 app.put("/user/:id", (req, res) => {
@@ -122,12 +147,10 @@ app.delete("/user/:id", (req, res) => {
       console.error("Error deleting data from SQL:", error);
       res.status(500).json({ error: "Internal server error" });
     } else {
+        console.log('User deleted successfully ')
       res.send("User deleted successfully");
     }
   });
 });
 
-
-
-const PORT = 7000;
-app.listen(PORT, () => console.log(`Express server is running on port ${PORT}`));
+module.exports = app;

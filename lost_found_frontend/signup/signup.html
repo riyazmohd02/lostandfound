@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sign Up Page</title>
 <link rel="stylesheet" href="signup.css">
+<script src="signup.js"></script>
 </head>
 
 <body>
@@ -54,18 +55,16 @@
       <div class="form-container">
         <label for="password1" class="mandatory">Confirm Password
         </label>
-        <input type="password" class="rounded-text-field" id="password1" name="password1" placeholder="Renter your password"
+        <input type="password" class="rounded-text-field" id="confirmpassword" name="confirmpassword" placeholder="Renter your password"
           maxlength="12" oninput="validatePassword1(this)">
           <input type="checkbox" id="showPassword1" onclick="togglePasswordVisibility1()"> Show Password
         <p id="password1-error" class="error-message"></p>
       </div>
 
       <div class="upload-container">
-        <button id="next-button" onclick="validateForm()">Create Account</button>
+        <button id="next-button" onclick="registerUser()">Create Account</button>
       </div>
 
     </div>
-
-  <script src="signup.js"></script>
 </body>
 </html>
