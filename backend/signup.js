@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // GET all users
 app.get("/user", (req, res) => {
-  connection.query("SELECT * FROM user", (err, rows) => {
+  connection.query("SELECT * FROM users", (err, rows) => {
     if (err) {
       console.log(err);
       res.status(500).json({ error: "Internal server error" });
@@ -28,7 +28,7 @@ app.get("/user", (req, res) => {
 // GET user by ID
 app.get("/user/:id", (req, res) => {
   connection.query(
-    "SELECT * FROM user WHERE userid=?",
+    "SELECT * FROM users WHERE userid=?",
     [req.params.id],
     (err, rows) => {
       if (err) {
@@ -81,7 +81,7 @@ app.post("/register", [
     const hashedPassword = await bcrypt.hash(password, 10);
     const hashedconfirmPassword = await bcrypt.hash(confirmpassword, 10);
 
-    const sql = "INSERT INTO user (first_name, last_name, email, password, confirmpassword) VALUES (?,?,?,?,?)";
+    const sql = "INSERT INTO users (first_name, last_name, email, password, confirmpassword) VALUES (?,?,?,?,?)";
     const values = [first_name, last_name, email, hashedPassword, hashedconfirmPassword];
 
     connection.query(sql, values, (error, result) => {
@@ -100,7 +100,7 @@ app.post("/register", [
 // Helper function to check if email already exists in the database
 const doesEmailExist = (email) => {
   return new Promise((resolve, reject) => {
-    const checkEmailQuery = "SELECT * FROM user WHERE email=?";
+    const checkEmailQuery = "SELECT * FROM users WHERE email=?";
     connection.query(checkEmailQuery, [email], (error, result) => {
       if (error) {
         console.error("Error checking email in SQL:", error);
@@ -122,7 +122,7 @@ app.put("/user/:id", (req, res) => {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
-  const sql = "UPDATE user SET first_name=?, last_name=?, email=?, password=?, confirmpassword=? WHERE userid=?";
+  const sql = "UPDATE users SET first_name=?, last_name=?, email=?, password=?, confirmpassword=? WHERE userid=?";
   const values = [first_name, last_name, email, password, confirmpassword, userId];
 
   connection.query(sql, values, (error) => {
@@ -139,7 +139,7 @@ app.put("/user/:id", (req, res) => {
 app.delete("/user/:id", (req, res) => {
   const userId = req.params.id;
 
-  const sql = "DELETE FROM user WHERE userid=?";
+  const sql = "DELETE FROM users WHERE userid=?";
   const values = [userId];
 
   connection.query(sql, values, (error) => {

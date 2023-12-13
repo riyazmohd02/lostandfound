@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Function to get a user by email from the database
 async function getUserByEmail(email) {
   try {
-    const sql = "SELECT * FROM user WHERE email = ?";
+    const sql = "SELECT * FROM users WHERE email = ?";
     const rows = await query(sql, [email]);
     return rows.length > 0 ? rows[0] : null;
   } catch (error) {
@@ -41,23 +41,36 @@ app.post('/login', async (req, res) => {
     // Check if the email exists in the database
     const user = await getUserByEmail(email);
 
+    // if (!user) {
+    //   console.log('User not found for email:', email);
+    //   return res.status(401).json({ error: 'User not found' });
+    // }
+
     if (!user) {
       console.log('User not found for email:', email);
-      return res.status(401).json({ error: 'User not found' });
+      return res.status(401).json({ userFound: false, error: 'User not found' });
     }
+
 
     // Check if the entered password matches the stored hashed password
     const passwordMatch = await bcrypt.compare(password, user.password);
 
+    // if (!passwordMatch) {
+    //   console.log('Incorrect password for email:', email);
+    //   return res.status(401).json({ error: 'Incorrect password' });
+    // }
+
     if (!passwordMatch) {
       console.log('Incorrect password for email:', email);
-      return res.status(401).json({ error: 'Incorrect password' });
+      return res.status(401).json({ userFound: false, error: 'Incorrect password' });
     }
 
     // Successful login
     console.log('Login successful for email:', email);
+    
     res.json({ message: 'Login successful', userId: user.userid });
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Error in login:', error);
     return res.status(500).json({ error: 'Internal server error' });
   }
