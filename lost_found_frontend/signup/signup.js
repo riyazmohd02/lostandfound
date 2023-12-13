@@ -70,16 +70,13 @@ function togglePasswordVisibility1() {
 }
 
 function validateForm() {
-  // alert("hi")
   var firstname = document.getElementById('firstname').value;
-  var lastname = document.getElementById('lastname').value;
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
   var password1 = document.getElementById('password1').value;
 
 
   document.getElementById('firstname-error').innerText = "";
-  document.getElementById('lastname-error').innerText = "";
   document.getElementById('email-error').innerText = "";
   document.getElementById('password-error').innerText = "";
   document.getElementById('password1-error').innerText = "";
@@ -92,7 +89,6 @@ function validateForm() {
 
   if (firstname.trim() === "") {
     document.getElementById('firstname-error').innerText = "Firstname is mandatory";
-    alert("hi")
     isValid = false;
   } else {
     document.getElementById('firstname-error').innerText = ""; // Clear error when user starts typing
@@ -121,13 +117,11 @@ function validateForm() {
   }
 
   if (isValid) {
-    create_account();
+    registerUser(); // Call the function to register the user
   } else {
 
     if (firstname.trim() === "") {
       document.getElementById('firstname').focus();
-    } else if (lastname.trim() === "") {
-      document.getElementById('lastname').focus();
     } else if (email.trim() === "") {
       document.getElementById('email').focus();
     } else if (password.trim() === "") {
@@ -139,12 +133,40 @@ function validateForm() {
   }
 }
 
+function create_account() {
+  window.location.href = "../home page/home_page.html";
+}
+
+function showPopup() {
+  // Create a popup element
+  const popup = document.createElement('div');
+  popup.className = 'popup';
+  popup.innerHTML = `
+    <div class="popup-content">
+      <p>User account created successfully!</p>
+      <button onclick="closePopup()">OK</button>
+    </div>
+  `;
+  document.body.appendChild(popup);
+}
+
+function closePopup() {
+  // Remove the popup element
+  const popup = document.querySelector('.popup');
+  if (popup) {
+    popup.remove();
+    window.location.href = "../login/login.html";
+  }
+}
+
+
+
 function registerUser() {
   const firstname = document.getElementById('firstname').value;
   const lastname = document.getElementById('lastname').value;
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
-  const confirmpassword = document.getElementById('confirmpassword').value;
+  const confirmpassword = document.getElementById('password1').value;
 
   const userData = {
     first_name: firstname,
@@ -153,6 +175,8 @@ function registerUser() {
     password: password,
     confirmpassword: confirmpassword,
   };
+
+  // Make an HTTP request to your server-side script
   fetch('http://localhost:7000/register', {
     method: 'POST',
     headers: {
@@ -160,27 +184,50 @@ function registerUser() {
     },
     body: JSON.stringify(userData),
   })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      } else if (response.status === 401) {
-        throw new Error('401 - Unauthorized: Invalid credentials');
-      } else if (response.status === 409) {
-        throw new Error('409 - Conflict: User already exists');
-      } else {
-        throw new Error(`Error: ${response.status} - ${response.statusText}`);
-      }
-    })
-    .then(result => {
-      console.log('User registration successful:', result);
-      alert('User registration successful!');
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    } else if (response.status === 401) {
+      throw new Error('401 - Unauthorized: Invalid credentials');
+    } else if (response.status === 409) {
+      // Email already exists, show a popup
+      throw new Error('409 - Conflict: User already exists');
+      showEmailExistsPopup();
+    } else {
+      throw new Error(`Error: ${response.status} - ${response.statusText}`);
+    }
+  })
+  .then(result => {
+    //console.log('User registration successful:', result);
+    showPopup();
 
-      // Redirect to the login page
-      window.location.href = "../login/login.html";
+    // Redirect to the login page or any other page
+    //window.location.href = "../login/login.html";
+  })
+  .catch(error => {
+    console.error('Error during user registration: ', error);
+    showEmailExistsPopup()
+  });
+}
 
-    })
+function showEmailExistsPopup() {
+// Create a popup element for email exists
+const emailExistsPopup = document.createElement('div');
+emailExistsPopup.className = 'popup';
+emailExistsPopup.innerHTML = `
+  <div class="popup-content">
+    <p>Email already exists.</p>
+    <p>Please use a different email.</p>
+    <button onclick="closeEmailExistsPopup()">OK</button>
+  </div>
+`;
+document.body.appendChild(emailExistsPopup);
+}
 
-    .catch(error => {
-      console.error('Error during user registration: ', error);
-    })
+function closeEmailExistsPopup() {
+// Remove the email exists popup element
+const emailExistsPopup = document.querySelector('.popup');
+if (emailExistsPopup) {
+  emailExistsPopup.remove();
+}
 }
