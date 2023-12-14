@@ -79,7 +79,7 @@ const passwordField = document.getElementById('password');
               displayErrorPopup(data.error); // Display error from the server
             } else {
               
-              window.location.href = '../home page/home_page.html';
+              window.location.href = '../homepage/home_page.html';
             }
           })
           .catch(error => {
