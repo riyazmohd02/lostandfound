@@ -75,6 +75,7 @@ const passwordField = document.getElementById('password');
           })
           .then(data => {
             console.log(data);
+            console.log("Reult: ",localStorage.setItem("userid",data.userId));
             if (data.error) {
               displayErrorPopup(data.error); // Display error from the server
             } else {

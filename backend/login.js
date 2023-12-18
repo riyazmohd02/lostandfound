@@ -41,10 +41,6 @@ app.post('/login', async (req, res) => {
     // Check if the email exists in the database
     const user = await getUserByEmail(email);
 
-    // if (!user) {
-    //   console.log('User not found for email:', email);
-    //   return res.status(401).json({ error: 'User not found' });
-    // }
 
     if (!user) {
       console.log('User not found for email:', email);
@@ -67,6 +63,7 @@ app.post('/login', async (req, res) => {
 
     // Successful login
     console.log('Login successful for email:', email);
+
     
     res.json({ message: 'Login successful', userId: user.userid });
   } 

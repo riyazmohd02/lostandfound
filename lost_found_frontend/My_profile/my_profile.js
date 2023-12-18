@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function enableEditMode() {
   // Enable specific input fields for editing
   document.getElementById("LastName").removeAttribute('disabled');
-  document.getElementById("Phone number").removeAttribute('disabled');
+  document.getElementById("Phonenumber").removeAttribute('disabled');
   document.getElementById("gender").removeAttribute('disabled');
   document.getElementById("Country/Region").removeAttribute('disabled');
 
@@ -91,29 +91,36 @@ function saveChanges() {
     popup.remove();
   }, 3000);
 
-  const userid = localStorage.getItem("userid");
+  
   const updatedUserData = {
     first_name: document.getElementById("firstName").value,
     last_name: document.getElementById("LastName").value,
     email: document.getElementById("Email").value,
-    phone_number: document.getElementById("Phone number").value,
+    phone_number: document.getElementById("Phonenumber").value,
     gender: document.getElementById("gender").value,
     country_region: document.getElementById("Country/Region").value,
   };
 
+
+  const userid = localStorage.getItem("userid");
+
   // Make a PUT request to update user data
-  fetch(`http://localhost:7000/user/${userid}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(updatedUserData),
-  })
+    fetch(`http://localhost:7000/user/${userid}`)
     .then((response) => {
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        if (response.status === 404) {
+          throw new Error("User not found");
+        } else {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
       }
       return response.json();
+    })
+    .then ((userData) => {
+      console.log("USER DATA: ", userData);
+
+      //update the UI with the fetched user data
+      updateUI(userData);
     })
     .then((updatedData) => {
       console.log("Updated User Data:", updatedData);
@@ -160,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("firstName").value = userData[0].first_name;
     document.getElementById("LastName").value = userData[0].last_name;
     document.getElementById("Email").value = userData[0].email;
-    document.getElementById("Phone number").value = userData[0].phone_number;
+    document.getElementById("Phonenumber").value = userData[0].phone_number;
     document.getElementById("gender").value = userData[0].gender;
     document.getElementById("Country/Region").value =
       userData[0].country_region;
