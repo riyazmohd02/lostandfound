@@ -91,7 +91,85 @@ function saveChanges() {
     popup.remove();
   }, 3000);
 
+  const userid = localStorage.getItem("userid");
+  const updatedUserData = {
+    first_name: document.getElementById("firstName").value,
+    last_name: document.getElementById("LastName").value,
+    email: document.getElementById("Email").value,
+    phone_number: document.getElementById("Phone number").value,
+    gender: document.getElementById("gender").value,
+    country_region: document.getElementById("Country/Region").value,
+  };
+
+  // Make a PUT request to update user data
+  fetch(`http://localhost:7000/user/${userid}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedUserData),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((updatedData) => {
+      console.log("Updated User Data:", updatedData);
+
+      // Optionally, update the UI with the updated data
+      updateUI(updatedData);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+
   // Return false to prevent the form submission (assuming you don't want to submit the form)
   return false;
 }
-        
+
+// Retrieve user ID from localStorage
+document.addEventListener("DOMContentLoaded", function () {
+  // Function to fetch user data and update the UI
+  function fetchUserData() {
+    const userid = localStorage.getItem("userid");
+
+    // Make a GET request to fetch user data
+    fetch(`http://localhost:7000/user/${userid}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((userData) => {
+        console.log("User Data:", userData);
+
+        // Update the UI with the fetched user data
+        updateUI(userData);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
+  // Function to update the UI with user data
+  function updateUI(userData) {
+    // Update the elements in your HTML with the user data
+    document.getElementById("firstName").value = userData[0].first_name;
+    document.getElementById("LastName").value = userData[0].last_name;
+    document.getElementById("Email").value = userData[0].email;
+    document.getElementById("Phone number").value = userData[0].phone_number;
+    document.getElementById("gender").value = userData[0].gender;
+    document.getElementById("Country/Region").value =
+      userData[0].country_region;
+
+    // Enable the save button after fetching user data
+    document.getElementById("save-button").disabled = false;
+  }
+
+  // Call the fetchUserData function when the DOM is loaded
+  fetchUserData();
+});
+
