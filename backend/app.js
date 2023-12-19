@@ -16,6 +16,8 @@ app.use('/', signupRouter);
 // Use the login router
 const loginRouter = require('./login');
 app.use('/', loginRouter); // Change this line to use '/login' instead of '/'
+const reportitemRouter = require('./reportitem');
+app.use('/',reportitemRouter);
 
 
 // Start the server
