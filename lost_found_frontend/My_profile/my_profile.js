@@ -45,11 +45,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  function goBack() {
-    window.history.back();
-  }
+ 
 
 });
+
+function goBack() {
+  window.history.back();
+}
 
 function enableEditMode() {
   // Enable specific input fields for editing
@@ -105,7 +107,14 @@ function saveChanges() {
   const userid = localStorage.getItem("userid");
 
   // Make a PUT request to update user data
-    fetch(`http://localhost:7000/user/${userid}`)
+    fetch(`http://localhost:7000/user/${userid}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedUserData),
+    })
+
     .then((response) => {
       if (!response.ok) {
         if (response.status === 404) {
