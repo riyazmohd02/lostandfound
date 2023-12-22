@@ -1,3 +1,26 @@
+function validateAlphabets(inputField) {
+  var inputValue = inputField.value;
+  var regex = /^[A-Za-z]+$/;
+
+  if (!regex.test(inputValue)) {
+    // If the input contains non-alphabetic characters, remove them
+    inputField.value = inputValue.replace(/[^A-Za-z]/g, '');
+  }
+  else {
+    document.getElementById('firstname-error').innerText = ""; // Clear error when user starts typing
+  }
+}
+
+function validatePhoneNumber(inputField) {
+  var inputValue = inputField.value;
+  var regex = /^[0-9]{1,10}$/;
+
+  if (!regex.test(inputValue)) {
+    // If the input does not match the pattern, remove non-numeric characters
+    inputField.value = inputValue.replace(/\D/g, '');
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const profilePicture = document.getElementById("profilePicture");
   const editImageInput = document.getElementById("editImage");
@@ -188,4 +211,3 @@ document.addEventListener("DOMContentLoaded", function () {
   // Call the fetchUserData function when the DOM is loaded
   fetchUserData();
 });
-
