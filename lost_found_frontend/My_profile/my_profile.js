@@ -1,5 +1,11 @@
 function validateAlphabets(inputField) {
   var inputValue = inputField.value;
+
+  // Capitalize the first letter and convert the rest to lowercase
+  var formattedValue = inputValue.charAt(0).toUpperCase() + inputValue.slice(1).toLowerCase();
+
+  // Update the input field with the formatted value
+  inputField.value = formattedValue;
   var regex = /^[A-Za-z]+$/;
 
   if (!regex.test(inputValue)) {
@@ -9,6 +15,9 @@ function validateAlphabets(inputField) {
   else {
     document.getElementById('firstname-error').innerText = ""; // Clear error when user starts typing
   }
+
+  // Clear error when user starts typing
+  document.getElementById('firstname-error').innerText = "";
 }
 
 function validatePhoneNumber(inputField) {
@@ -68,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
- 
+
 
 });
 
@@ -76,7 +85,48 @@ function goBack() {
   window.history.back();
 }
 
+
+function toggleEditMode() {
+  const editProfileBtn = document.getElementById("edit-profile-btn");
+  const saveButton = document.getElementById("save-button");
+
+  // Toggle the class 'active' on the "Edit Profile" button
+  editProfileBtn.classList.toggle('active');
+
+  // If the button is in edit mode (has the 'active' class)
+  if (editProfileBtn.classList.contains('active')) {
+    // Change button style when in edit mode (gray color)
+    editProfileBtn.style.backgroundColor = '#a6a6a6';
+    editProfileBtn.style.color = '#fff';
+
+    // Change "Save Changes" button style when in edit mode (blue color)
+    saveButton.style.backgroundColor = '#27adda';
+    saveButton.style.color = 'black';
+    // Enable pointer events for the active state
+    saveButton.style.pointerEvents = 'auto';
+    // Set cursor to pointer
+    saveButton.style.cursor = 'pointer';
+  } else {
+    // Change button style when not in edit mode (#27adda color)
+    editProfileBtn.style.backgroundColor = '#27adda';
+    editProfileBtn.style.color = 'black';
+
+    // Change "Save Changes" button style when not in edit mode (gray color)
+    saveButton.style.backgroundColor = '#a6a6a6';
+    saveButton.style.color = '#fff';
+    // Disable pointer events for the inactive state
+    saveButton.style.pointerEvents = 'none';
+  }
+
+  // Add your logic to enable/disable input fields, etc.
+  enableEditMode();
+}
+
 function enableEditMode() {
+  // Toggle the class 'active' on the "Edit Profile" button
+  const editProfileBtn = document.getElementById("edit-profile-btn");
+  editProfileBtn.classList.toggle('active');
+
   // Enable specific input fields for editing
   document.getElementById("LastName").removeAttribute('disabled');
   document.getElementById("Phonenumber").removeAttribute('disabled');
@@ -106,6 +156,9 @@ function saveChanges() {
   saveButton.style.backgroundColor = '#a6a6a6';
   saveButton.style.cursor = 'not-allowed';
 
+  const editProfileBtn = document.getElementById("edit-profile-btn");
+  editProfileBtn.style.backgroundColor = '#27adda';
+  editProfileBtn.style.color = 'black';
   // Display a side popup message for 3 seconds
   const popup = document.createElement("div");
   popup.className = "popup";
@@ -116,7 +169,7 @@ function saveChanges() {
     popup.remove();
   }, 3000);
 
-  
+
   const updatedUserData = {
     first_name: document.getElementById("firstName").value,
     last_name: document.getElementById("LastName").value,
@@ -130,13 +183,13 @@ function saveChanges() {
   const userid = localStorage.getItem("userid");
 
   // Make a PUT request to update user data
-    fetch(`http://localhost:7000/user/${userid}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedUserData),
-    })
+  fetch(`http://localhost:7000/user/${userid}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedUserData),
+  })
 
     .then((response) => {
       if (!response.ok) {
@@ -148,7 +201,7 @@ function saveChanges() {
       }
       return response.json();
     })
-    .then ((userData) => {
+    .then((userData) => {
       console.log("USER DATA: ", userData);
 
       //update the UI with the fetched user data
@@ -205,7 +258,7 @@ document.addEventListener("DOMContentLoaded", function () {
       userData[0].country_region;
 
     // Enable the save button after fetching user data
-    document.getElementById("save-button").disabled = false;
+    document.getElementById("save-button").disabled = true; // Ensure the button is initially disabled
   }
 
   // Call the fetchUserData function when the DOM is loaded
