@@ -42,6 +42,7 @@ body {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
+
 .back-button {
   font-size: 30px;
   cursor: pointer;
@@ -117,7 +118,7 @@ body {
   border-radius: 10px;
   padding: 5px;
   font-size: 16px;
-  background-color: #d1e6f5;
+  /* background-color: #d1e6f5; */
   border: 2px solid #020202;
   cursor: pointer;
 }
@@ -144,7 +145,7 @@ input[type="text"] {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #d1e6f5;
+  /* background-color: #d1e6f5; */
   border: 2px solid #020202;
 }
 
@@ -160,14 +161,14 @@ input[type="text"] {
   height: 30px;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #d1e6f5;
+  /* background-color: #d1e6f5; */
   border-radius: 10px;
   /* Set border-radius for curved edges */
   padding: 5px;
   /* Add some padding inside the text field */
   font-size: 16px;
   /* Set font size */
-  border: 2px solid #020202;
+  border: 2px solid;
   cursor: pointer;
 }
 
@@ -176,7 +177,7 @@ input[type="text"] {
   /* Set the width of the text field */
   height: 20px;
   /* Set the height of the text field */
-  border: 1px solid #ccc;
+  border: 1px solid;
   /* Set border color and style */
   border-radius: 10px;
   /* Set border-radius for curved edges */
@@ -195,7 +196,7 @@ input[type="text"] {
   font-size: 16px;
   /* Set font size */
   font-family: Arial, sans-serif;
-  background-color: #d1e6f5;
+  /* background-color: #d1e6f5; */
 }
 
 .file-input,

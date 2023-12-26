@@ -39,15 +39,17 @@
                 <p id="category-error" class="error-message"></p>
             </div>
 
+            <div class="form-container">
+                <label for="itemname" class="mandatory">Item name</label>
+                <input type="text" id="itemname" name="itemname" class="rounded-text-field"
+                    placeholder="Enter the item name" onkeypress="return allowAlphabetsOnly(event)">
+                <p id="itemname-error" class="error-message"></p>
+            </div>
 
             <div class="form-container">
-
                 <label for="location">Location </label>
-
                 <input type="text" id="location" name="location" class="rounded-text-field"
                     placeholder="Select location" onkeypress="return allowAlphabetsOnly(event)">
-
-
             </div>
 
             <div class="form-container">
@@ -115,9 +117,7 @@
     </div>
     </div>
 
-    <script src="lost_item.js">
-
-    </script>
+    <script src="lost_item.js"></script>
     </div>
 </body>
 
