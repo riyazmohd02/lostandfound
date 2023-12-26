@@ -154,6 +154,14 @@ function enableEditMode() {
   document.getElementById("save-button").removeAttribute('disabled');
 }
 
+function validateAndCapitalize(input) {
+  // Capitalize the first letter
+  input.value = input.value.charAt(0).toUpperCase() + input.value.slice(1);
+
+  // Validate only alphabets
+  input.value = input.value.replace(/[^a-zA-Z]/g, '');
+}
+
 function saveChanges() {
   // Disable all input fields
   const inputFields = document.querySelectorAll('.form-control');
