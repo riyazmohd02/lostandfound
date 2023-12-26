@@ -41,12 +41,13 @@
       </div>
 
       <div class="form-container">
+        <label for="itemname" class="mandatory">Item Name</label>
+        <input type="text" class="rounded-text-field" id="itemname" name="itemname" placeholder="Enter the item name">
+        <p id="itemname-error" class="error-message"></p>
+      </div>
+
+      <div class="form-container">
         <label for="location" class="mandatory">Location
-          <!-- <span>
-            <div class="tooltip">i
-              <span class="tooltiptext">Provide the location where you have found the item</span>
-            </div>
-          </span> -->
         </label>
         <input type="text" class="rounded-text-field" id="location" name="location" placeholder="Enter location">
         <p id="location-error" class="error-message"></p>
@@ -54,11 +55,6 @@
 
       <div class="form-container">
         <label for="date">Date
-          <!-- <span>
-            <div class="tooltip">i
-              <span class="tooltiptext">Provide the date when you have found the item</span>
-            </div>
-          </span> -->
         </label>
         <!-- <input type="date" class="rounded-text-field" id="datepicker" max="9999-12-31" maxlength="10"> -->
         <input type="date" class="rounded-text-field" id="datepicker" max="9999-12-31" min="2000-01-01" maxlength="10">

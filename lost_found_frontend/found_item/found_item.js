@@ -78,11 +78,12 @@ document.getElementById('datepicker').setAttribute('max', maxDate);
 
 function validateForm() {
   var category = document.getElementById('category').value;
+  var itemname = document.getElementById('itemname').value; // New line for itemname
   var location = document.getElementById('location').value;
   var description = document.getElementById('description').value;
 
-
   document.getElementById('category-error').innerText = "";
+  document.getElementById('itemname-error').innerText = ""; // New line for itemname
   document.getElementById('location-error').innerText = "";
   document.getElementById('description-error').innerText = "";
 
@@ -91,9 +92,13 @@ function validateForm() {
 
   var isValid = true;
 
-
   if (category.trim() === "") {
     document.getElementById('category-error').innerText = "Category is mandatory";
+    isValid = false;
+  }
+
+  if (itemname.trim() === "") { // New block for itemname
+    document.getElementById('itemname-error').innerText = "Item Name is mandatory";
     isValid = false;
   }
 
@@ -110,13 +115,13 @@ function validateForm() {
     isValid = false;
   }
 
-
   if (isValid) {
     navigateToNextPage();
   } else {
-
     if (category.trim() === "") {
       document.getElementById('category').focus();
+    } else if (itemname.trim() === "") { // New block for itemname
+      document.getElementById('itemname').focus();
     } else if (location.trim() === "") {
       document.getElementById('location').focus();
     } else if (description.trim() === "") {
