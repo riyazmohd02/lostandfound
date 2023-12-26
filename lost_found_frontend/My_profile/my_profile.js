@@ -1,13 +1,29 @@
+// function validateAlphabets(inputField) {
+//   var inputValue = inputField.value;
+
+//   // Capitalize the first letter and convert the rest to lowercase
+//   var formattedValue = inputValue.charAt(0).toUpperCase() + inputValue.slice(1).toLowerCase();
+
+//   // Update the input field with the formatted value
+//   inputField.value = formattedValue;
+//   var regex = /^[A-Za-z]+$/;
+
+//   if (!regex.test(inputValue)) {
+//     // If the input contains non-alphabetic characters, remove them
+//     inputField.value = inputValue.replace(/[^A-Za-z]/g, '');
+//   }
+//   else {
+//     document.getElementById('firstname-error').innerText = ""; // Clear error when user starts typing
+//   }
+
+//   // Clear error when user starts typing
+//   document.getElementById('firstname-error').innerText = "";
+// }
+
 function validateAlphabets(inputField) {
   var inputValue = inputField.value;
-
-  // Capitalize the first letter and convert the rest to lowercase
-  var formattedValue = inputValue.charAt(0).toUpperCase() + inputValue.slice(1).toLowerCase();
-
-  // Update the input field with the formatted value
-  inputField.value = formattedValue;
   var regex = /^[A-Za-z]+$/;
-
+ 
   if (!regex.test(inputValue)) {
     // If the input contains non-alphabetic characters, remove them
     inputField.value = inputValue.replace(/[^A-Za-z]/g, '');
@@ -15,9 +31,6 @@ function validateAlphabets(inputField) {
   else {
     document.getElementById('firstname-error').innerText = ""; // Clear error when user starts typing
   }
-
-  // Clear error when user starts typing
-  document.getElementById('firstname-error').innerText = "";
 }
 
 function validatePhoneNumber(inputField) {
