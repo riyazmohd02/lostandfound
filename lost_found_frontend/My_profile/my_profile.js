@@ -1,29 +1,13 @@
-// function validateAlphabets(inputField) {
-//   var inputValue = inputField.value;
-
-//   // Capitalize the first letter and convert the rest to lowercase
-//   var formattedValue = inputValue.charAt(0).toUpperCase() + inputValue.slice(1).toLowerCase();
-
-//   // Update the input field with the formatted value
-//   inputField.value = formattedValue;
-//   var regex = /^[A-Za-z]+$/;
-
-//   if (!regex.test(inputValue)) {
-//     // If the input contains non-alphabetic characters, remove them
-//     inputField.value = inputValue.replace(/[^A-Za-z]/g, '');
-//   }
-//   else {
-//     document.getElementById('firstname-error').innerText = ""; // Clear error when user starts typing
-//   }
-
-//   // Clear error when user starts typing
-//   document.getElementById('firstname-error').innerText = "";
-// }
-
 function validateAlphabets(inputField) {
   var inputValue = inputField.value;
+
+  // Capitalize the first letter and convert the rest to lowercase
+  var formattedValue = inputValue.charAt(0).toUpperCase() + inputValue.slice(1).toLowerCase();
+
+  // Update the input field with the formatted value
+  inputField.value = formattedValue;
   var regex = /^[A-Za-z]+$/;
- 
+
   if (!regex.test(inputValue)) {
     // If the input contains non-alphabetic characters, remove them
     inputField.value = inputValue.replace(/[^A-Za-z]/g, '');
@@ -31,15 +15,36 @@ function validateAlphabets(inputField) {
   else {
     document.getElementById('firstname-error').innerText = ""; // Clear error when user starts typing
   }
+
+  // Clear error when user starts typing
+  document.getElementById('firstname-error').innerText = "";
 }
+
+// function validateAlphabets(inputField) {
+//   var inputValue = inputField.value;
+//   var regex = /^[A-Za-z]+$/;
+ 
+//   if (!regex.test(inputValue)) {
+//     // If the input contains non-alphabetic characters, remove them
+//     inputField.value = inputValue.replace(/[^A-Za-z]/g, '');
+//   }
+//   else {
+//     document.getElementById('firstname-error').innerText = ""; // Clear error when user starts typing
+//   }
+// }
 
 function validatePhoneNumber(inputField) {
   var inputValue = inputField.value;
-  var regex = /^[0-9]{1,10}$/;
+  var regex = /^[0-9]{10}$/;
 
   if (!regex.test(inputValue)) {
-    // If the input does not match the pattern, remove non-numeric characters
+    // If the input does not match the pattern, show an error message
     inputField.value = inputValue.replace(/\D/g, '');
+    document.getElementById('phonenumber-error').innerText = "Invalid mobile number";
+    // You can add additional styling or logic here to highlight the error to the user
+  } else {
+    // If the input is valid, clear the error message
+    document.getElementById('phonenumber-error').innerText = "";
   }
 }
 

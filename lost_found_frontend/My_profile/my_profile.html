@@ -60,13 +60,17 @@
             <div class="input-container">
               <input type="text" class="form-control with-icon" placeholder="Enter Phone number" name="Phonenumber"
                 id="Phonenumber" maxlength="10" oninput="validatePhoneNumber(this)" required disabled />
+
             </div>
+            <div id="phonenumber-error" style="color: red;"></div>
+
+
 
             <label for="Gender"><b>Gender </b></label>
             <div class="input-container">
               <select class="form-control" name="gender" id="gender" required disabled>
-                <option value="" selected >Select</option>
-                <option value="male">Male</option>
+                <option value="" disabled>Select</option>
+                <option value="male" selected>Male</option>
                 <option value="female">Female</option>
                 <option value="other">Other</option>
               </select>
