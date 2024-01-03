@@ -1,6 +1,6 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #f0f0f0;
+  background-color: #ffffff;
   margin: 0;
   padding: 0;
 }
@@ -9,7 +9,7 @@ body {
   max-width: 400px;
   margin: 0px auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -100,7 +100,7 @@ input[type="password"] {
   display: inline-block;
   border: none;
   border-radius: 10px;
-  background: #cce3f5;
+  /* background: #cce3f5; */
   border: 1px solid black;
 }
 
@@ -115,13 +115,13 @@ button {
   margin-left: 65px;
 }
 
-button:hover {
-  background-color: #a6a6a6;
-}
-
 button.active {
   cursor: pointer;
+  /* Set cursor to pointer for the active state */
   background-color: #27adda;
+  color: black;
+  pointer-events: auto;
+  /* Enable pointer events for the active state */
 }
 
 /* Add a blue text color to links */
@@ -136,7 +136,7 @@ a {
   padding-bottom: 10px;
   margin-bottom: 5px;
 
-  background-color: #cce3f5;
+  /* background-color: #cce3f5; */
 }
 
 .input-container {
@@ -153,12 +153,12 @@ a {
   left: 220px;
   top: 35%;
   transform: translateY(-50%);
-  color: #ccc;
+  color: #31b6df;
   /* Adjust the color as needed */
 }
 
 .edit-profile-btn {
-  background-color: #b7b7b7;
+  background-color: #27adda;
   color: black;
   border: none;
   padding: 5px;
@@ -170,8 +170,10 @@ a {
   cursor: pointer;
 }
 
-.edit-profile-btn:hover {
-  background-color: #d9d9d9;
+
+
+.edit-profile-btn.active {
+  background-color: #27adda;
 }
 
 .popup {

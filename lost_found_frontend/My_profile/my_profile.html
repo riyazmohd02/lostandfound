@@ -30,7 +30,10 @@
           <label for="editImage" class="edit-icon">
             <i class="fa fa-edit"></i>
           </label>
-          <button class="edit-profile-btn" onclick="enableEditMode()">Edit Profile</button>
+          <!-- <button class="edit-profile-btn" onclick="enableEditMode()">Edit Profile</button> -->
+          <!-- <button id="edit-profile-btn" class="edit-profile-btn" onclick="enableEditMode()">Edit Profile</button> -->
+          <button id="edit-profile-btn" class="edit-profile-btn" onclick="toggleEditMode()">Edit Profile</button>
+
           <input type="file" id="editImage" name="editImage" accept="image/*" style="display: none;">
         </div>
         <form action="/saveProfile" method="post" onsubmit="return saveChanges()">
@@ -38,26 +41,30 @@
             <label for="firstName"><b>First Name </b></label>
             <div class="input-container">
               <input type="text" class="form-control with-icon" placeholder="Enter First Name" name="firstName"
-                id="firstName" required disabled/>
+                id="firstName" oninput="validateAlphabets(this)" required disabled />
             </div>
 
             <label for="LastName"><b>Last Name </b></label>
             <div class="input-container">
               <input type="text" class="form-control with-icon" placeholder="Enter Last Name" name="LastName"
-                id="LastName" required disabled />
+                id="LastName" oninput="validateAlphabets(this)" required disabled />
             </div>
 
             <label for="Email"><b>Email </b></label>
             <div class="input-container">
               <input type="text" class="form-control with-icon" placeholder="Enter Email ID" name="Email" id="Email"
-                required  disabled />
+                required disabled />
             </div>
 
             <label for="Phone number"><b>Phone Number </b></label>
             <div class="input-container">
               <input type="text" class="form-control with-icon" placeholder="Enter Phone number" name="Phonenumber"
-                id="Phonenumber" required  disabled />
+                id="Phonenumber" maxlength="10" oninput="validatePhoneNumber(this)" required disabled />
+
             </div>
+            <div id="phonenumber-error" style="color: red;"></div>
+
+
 
             <label for="Gender"><b>Gender </b></label>
             <div class="input-container">
@@ -72,11 +79,12 @@
             <label for="Country/Region"><b>Country/Region </b></label>
             <div class="input-container">
               <input type="text" class="form-control with-icon" placeholder="Enter Country/Region" name="Country/Region"
-                id="Country/Region" required  disabled />
+                id="Country/Region" oninput="validateAlphabets(this)" required disabled />
             </div>
           </div>
           <!-- <button type="submit" class="btn btn-primary registerbtn" id="saveChangesBtn" disabled>Save Changes</button> -->
           <button id="save-button" disabled>Save Changes</button>
+          <!-- <button id="save-button" class="active">Save Changes</button> -->
         </form>
 
       </div>

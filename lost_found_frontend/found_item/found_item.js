@@ -78,13 +78,13 @@ document.getElementById('datepicker').setAttribute('max', maxDate);
 
 function validateForm() {
   var category = document.getElementById('category').value;
-  var title = document.getElementById('itemname').value;
   var location = document.getElementById('location').value;
   var date = document.getElementById('datepicker').value;
   var description = document.getElementById('description').value;
-  var color = document.getElementById('color').value;
+
 
   document.getElementById('category-error').innerText = "";
+  document.getElementById('itemname-error').innerText = ""; // New line for itemname
   document.getElementById('location-error').innerText = "";
   document.getElementById('description-error').innerText = "";
 
@@ -93,9 +93,13 @@ function validateForm() {
 
   var isValid = true;
 
-
   if (category.trim() === "") {
     document.getElementById('category-error').innerText = "Category is mandatory";
+    isValid = false;
+  }
+
+  if (itemname.trim() === "") { // New block for itemname
+    document.getElementById('itemname-error').innerText = "Item Name is mandatory";
     isValid = false;
   }
 
@@ -111,7 +115,6 @@ function validateForm() {
     document.getElementById('description-error').innerText = "Description must be 200 characters or less";
     isValid = false;
   }
-
 
   if (isValid) {
     navigateToNextPage();
@@ -177,9 +180,10 @@ function validateForm() {
 
 
   } else {
-
     if (category.trim() === "") {
       document.getElementById('category').focus();
+    } else if (itemname.trim() === "") { // New block for itemname
+      document.getElementById('itemname').focus();
     } else if (location.trim() === "") {
       document.getElementById('location').focus();
     } else if (description.trim() === "") {
