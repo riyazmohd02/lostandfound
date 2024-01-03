@@ -78,9 +78,11 @@ document.getElementById('datepicker').setAttribute('max', maxDate);
 
 function validateForm() {
   var category = document.getElementById('category').value;
+  var title = document.getElementById('itemname').value;
   var location = document.getElementById('location').value;
+  var date = document.getElementById('datepicker').value;
   var description = document.getElementById('description').value;
-
+  var color = document.getElementById('color').value;
 
   document.getElementById('category-error').innerText = "";
   document.getElementById('location-error').innerText = "";
@@ -113,6 +115,67 @@ function validateForm() {
 
   if (isValid) {
     navigateToNextPage();
+
+    // document.getElementById('submit').setAttribute("onclick", "openPopup()")
+
+    // Create a FormData object to hold the form data
+
+    const itemtype = localStorage.getItem("itemtype");
+    console.log(itemtype, "item")
+    const userId = localStorage.getItem("userid")
+    const firstname = localStorage.getItem("firstname")
+    const lastname = localStorage.getItem("lastname")
+
+    console.log(firstname, "logindata")
+
+    const data = {
+      userid: userId,
+      first_name: firstname,
+      last_name: lastname,
+      category_id: category,
+      Item_name: title,
+      itemtype: itemtype,
+      description: description,
+      location: location,
+      color: color,
+      date_found: date,
+    
+    };
+    console.log(data, "FOUNDdata")
+
+    // Add other form fields as needed
+
+
+
+    // Make a POST request to your backend endpoint
+
+    fetch("http://localhost:7000/items", {
+
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+
+    })
+      .then((response) => {
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+
+      .then((data) => {
+        console.log(data);
+        if (data.error) {
+          displayErrorPopup(data.error); // Display error from the server
+        }
+
+      });
+
+
   } else {
 
     if (category.trim() === "") {

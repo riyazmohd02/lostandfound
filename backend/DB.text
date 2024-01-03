@@ -23,28 +23,28 @@ CREATE TABLE categories (
  
  
 CREATE TABLE Items_table (
-  Item_id INT PRIMARY KEY,
-  user_id INT,
+  Itemid INT auto_increment PRIMARY KEY,
+  userid INT,
   category_id INT,
   Item_name VARCHAR(255),
   color VARCHAR(255),
   brand VARCHAR(255),
   location VARCHAR(255),
-  item_type BOOLEAN,
+  itemtype ENUM('lost', 'found') NOT NULL,
   status VARCHAR(255),
   date_found DATETIME,
   image_url VARCHAR(255),
   first_name VARCHAR(255),
   last_name VARCHAR(255),
-  FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (userid) REFERENCES user(userid) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
  
 CREATE TABLE Item_description (
-  description_Id INT PRIMARY KEY,
-  Item_id INT,
+  description_Id INT auto_increment PRIMARY KEY,
+  Itemid INT,
   description VARCHAR(255),
-  FOREIGN KEY (Item_id) REFERENCES Items_table(Item_id) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (Itemid) REFERENCES Items_table(Itemid) ON DELETE CASCADE ON UPDATE CASCADE
 );
  
  

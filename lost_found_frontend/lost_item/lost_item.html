@@ -31,23 +31,22 @@
                 <!-- Replace the input text box with a select dropdown -->
                 <select id="category" class="rounded-drop-down" name="category">
                     <option value="" disabled selected>Select category</option>
-                    <option value="electronics">Electronics</option>
-                    <option value="clothing">Clothing</option>
-                    <option value="accessories">Accessories</option>
+                    <option value="1">Electronics</option>
+                    <option value="2">Clothing</option>
+                    <option value="3">Accessories</option>
                     <!-- Add more categories as needed -->
                 </select>
                 <p id="category-error" class="error-message"></p>
             </div>
-
-
             <div class="form-container">
-
+                <label for="itemname" class="mandatory">Item Name</label>
+                <input type="text" class="rounded-text-field" id="itemname" name="itemname" placeholder="Enter the item name">
+                <p id="itemname-error" class="error-message"></p>
+              </div>
+            <div class="form-container">
                 <label for="location">Location </label>
-
                 <input type="text" id="location" name="location" class="rounded-text-field"
                     placeholder="Select location" onkeypress="return allowAlphabetsOnly(event)">
-
-
             </div>
 
             <div class="form-container">

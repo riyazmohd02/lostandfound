@@ -74,7 +74,7 @@ app.get("/items/user/:userid", async (req, res) => {
 
 // POST method to insert data into both tables
 app.post("/items", async (req, res) => {
-  try{
+  try {
     const {
       userid,
       category_id,
@@ -88,13 +88,13 @@ app.post("/items", async (req, res) => {
       first_name,
       last_name,
       description,
-      
+
     } = req.body;
 
     console.log("Item data: ", req.body);
 
     // console.log("Image Buffer: ",req.file);
-  
+
     // // Check if a file is uploaded
     // const imageBuffer = req.file ? req.file.buffer : null;
 
@@ -155,6 +155,79 @@ app.post("/items", async (req, res) => {
   }
 });
 
+
+// PUT method to update data in both tables
+app.put("/itemsupdate/:itemid", async (req, res) => {
+  try {
+    const { itemid } = req.params;
+
+    // Validate that itemid is a positive integer
+    if (!(/^\d+$/.test(itemid))) {
+      return res.status(400).json({ error: "Invalid itemid format" });
+    }
+
+    const {
+      userid,
+      category_id,
+      Item_name,
+      color,
+      brand,
+      location,
+      itemtype,
+      status,
+      date_found,
+      first_name,
+      last_name,
+      description,
+    } = req.body;
+
+    console.log("Updated Item data: ", req.body);
+
+    try {
+      // Start a transaction
+      await query("START TRANSACTION");
+
+      // Update data in Items_table
+      await query(
+        "UPDATE Items_table SET userid=?, category_id=?, Item_name=?, color=?, brand=?, location=?, itemtype=?, status=?, date_found=?, first_name=?, last_name=? WHERE Itemid = ?",
+        [
+          userid,
+          category_id,
+          Item_name,
+          color,
+          brand,
+          location,
+          itemtype,
+          status,
+          date_found,
+          first_name,
+          last_name,
+          itemid,
+        ]
+      );
+
+      // Update data in Item_description
+      await query(
+        "UPDATE Item_description SET description=? WHERE Itemid = ?",
+        [description, itemid]
+      );
+
+      // Commit the transaction
+      await query("COMMIT");
+
+      res.json({ message: "Data updated successfully" });
+    } catch (error) {
+      // Rollback the transaction in case of an error
+      await query("ROLLBACK");
+
+      console.error("Error in PUT /items/:itemid:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  } catch (error) {
+    console.error("Error in PUT /items/:itemid:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 
 module.exports = app;

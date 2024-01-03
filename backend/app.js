@@ -12,12 +12,16 @@ app.use(express.urlencoded({ extended: true }));;
 app.use(cors());
 
 const signupRouter = require('./signup');
-app.use('/', signupRouter);
-// Use the login router
 const loginRouter = require('./login');
-app.use('/', loginRouter); // Change this line to use '/login' instead of '/'
 const reportitemRouter = require('./reportitem');
+const questionformRouter = require('./question');
+
+
+
+app.use('/', signupRouter);
+app.use('/', loginRouter);
 app.use('/',reportitemRouter);
+app.use('/', questionformRouter);
 
 
 // Start the server

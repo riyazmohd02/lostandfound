@@ -61,10 +61,14 @@ function filterByName() {
 
 function reportlost() {
   window.location.href = '../lost_item/lost_item.html';
+  localStorage.setItem("itemtype","lost")
 }
 
 function reportfound() {
   window.location.href = '../found_item/found_item.html';
+
+  localStorage.setItem("itemtype","found")
+
 }
 
 function showImageDetails(imageName) {

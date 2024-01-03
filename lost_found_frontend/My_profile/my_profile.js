@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function handleInputChange() {
     // Check if any changes are made
     const changesMade = Array.from(inputFields).some(field => {
-      return field.value !== field.defaultValue;
+      return field.value !== field.defaultValue;   
     });
 
     // Check if the profile picture has changed

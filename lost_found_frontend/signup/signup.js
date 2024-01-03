@@ -68,11 +68,11 @@ function togglePasswordVisibility1() {
   }
 
 }
-
+if(!document.getElementById('next-button').onclick){
 document.getElementById('next-button').addEventListener('click', function () {
   validateForm();
 });
-
+}
 
 function validateForm() {
   var firstname = document.getElementById('firstname').value;
@@ -142,6 +142,7 @@ function validateForm() {
   }
 
   if (isValid) {
+    document.getElementById('next-button').disabled = true;
     registerUser(); // Call the function to register the user
   } else {
     // Scroll to the first error field for better visibility

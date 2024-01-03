@@ -74,11 +74,15 @@ function login() {
       return response.json();
     })
     .then(data => {
-      console.log(data);
-      localStorage.setItem("userid", data.userId);
+      console.log(data.user);
+      localStorage.setItem("userid", data.user.userid);
+      localStorage.setItem("firstname",data.user.first_name);
+      localStorage.setItem("lastname",data.user.last_name);
+
       if (data.error) {
         displayErrorPopup(data.error); // Display error from the server
-      } else {
+      } 
+      else {
 
         window.location.href = '../homepage/home_page.html';
       }

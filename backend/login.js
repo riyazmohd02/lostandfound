@@ -4,16 +4,14 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const util = require("util");
 const connection = require("./dbconnection");
+const pool = require("./dbconnection");
 
 const app = express();
 
 // Use cors middleware
 app.use(cors());
 
-const query = util.promisify(connection.query).bind(connection);
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+const query = util.promisify(pool.query).bind(pool);
 
 // Function to get a user by email from the database
 async function getUserByEmail(email) {
@@ -51,11 +49,6 @@ app.post('/login', async (req, res) => {
     // Check if the entered password matches the stored hashed password
     const passwordMatch = await bcrypt.compare(password, user.password);
 
-    // if (!passwordMatch) {
-    //   console.log('Incorrect password for email:', email);
-    //   return res.status(401).json({ error: 'Incorrect password' });
-    // }
-
     if (!passwordMatch) {
       console.log('Incorrect password for email:', email);
       return res.status(401).json({ userFound: false, error: 'Incorrect password' });
@@ -63,9 +56,7 @@ app.post('/login', async (req, res) => {
 
     // Successful login
     console.log('Login successful for email:', email);
-
-    
-    res.json({ message: 'Login successful', userId: user.userid });
+    res.json({ message: 'Login successful', user });
   } 
   catch (error) {
     console.error('Error in login:', error);
@@ -73,10 +64,21 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// Define your routes and controller functions here
-app.get("/", function (req, res) {
-  console.log("result: ", error);
-  // Render your signup page here
+// GET method to fetch user details by userid
+app.get('/user/:userid', async (req, res) => {
+  try {
+    const { userid } = req.params;
+    const user = await getUserById(userid);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.error('Error fetching user by userid:', error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 module.exports = app;
