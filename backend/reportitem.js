@@ -20,7 +20,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //GET method for all posted items
 app.get("/found", (req, res) => {
-  connection.query("SELECT * FROM items_table", (err, rows) => {
+
+  //Extract the search query from the request
+  const searchKeyword = req.query.search;
+
+  // If there's a search keyword, filter by it. Otherwise, fetch all items.
+    let sql = "SELECT * FROM items_table";
+    const queryParams = [];
+    
+    if (searchKeyword) {
+        sql += " WHERE Item_name LIKE ?";
+        const queryParam = `%${searchKeyword}%`; // Using '%' as wildcard to match any substring
+        queryParams.push(queryParam, queryParam);
+    }
+  connection.query(sql, queryParams, (err, rows) => {
     if (err) {
       console.log(err);
       res.status(500).json({ error: "Internal server error" });
@@ -30,6 +43,17 @@ app.get("/found", (req, res) => {
     }
   });
 });
+
+
+// connection.query("SELECT * FROM items_table", (err, rows) => {
+//   if (err) {
+//     console.log(err);
+//     res.status(500).json({ error: "Internal server error" });
+//   } else {
+//     console.log('GET details: ', rows);
+//     res.send(rows);
+//   }
+// });
 
 //GET method by itemtype
 app.get("/items/:itemtype", async (req, res) => {
@@ -80,16 +104,17 @@ app.post("/items", async (req, res) => {
       category_id,
       Item_name,
       color,
-      brand,
       location,
       itemtype,
-      status,
       date_found,
       first_name,
       last_name,
       description,
 
     } = req.body;
+
+    // Set default status to 1 for new items
+    const status = 1;
 
     console.log("Item data: ", req.body);
 
@@ -108,13 +133,12 @@ app.post("/items", async (req, res) => {
 
       // Insert data into Items_table
       const insertItemResult = await query(
-        "INSERT INTO Items_table (userid, category_id, Item_name, color, brand, location, itemtype, status, date_found, first_name, last_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)",
+        "INSERT INTO Items_table (userid, category_id, Item_name, color, location, itemtype,  status, date_found, first_name, last_name) VALUES (?,?,?,?,?,?,?,?,?,?)",
         [
           userid,
           category_id,
           Item_name,
           color,
-          brand,
           location,
           itemtype,
           status,
@@ -160,6 +184,7 @@ app.post("/items", async (req, res) => {
 app.put("/itemsupdate/:itemid", async (req, res) => {
   try {
     const { itemid } = req.params;
+    const { status } = req.body;
 
     // Validate that itemid is a positive integer
     if (!(/^\d+$/.test(itemid))) {
@@ -171,10 +196,8 @@ app.put("/itemsupdate/:itemid", async (req, res) => {
       category_id,
       Item_name,
       color,
-      brand,
       location,
       itemtype,
-      status,
       date_found,
       first_name,
       last_name,
@@ -189,13 +212,12 @@ app.put("/itemsupdate/:itemid", async (req, res) => {
 
       // Update data in Items_table
       await query(
-        "UPDATE Items_table SET userid=?, category_id=?, Item_name=?, color=?, brand=?, location=?, itemtype=?, status=?, date_found=?, first_name=?, last_name=? WHERE Itemid = ?",
+        "UPDATE Items_table SET userid=?, category_id=?, Item_name=?, color=?, location=?, itemtype=?, status=?, date_found=?, first_name=?, last_name=? WHERE Itemid = ?",
         [
           userid,
           category_id,
           Item_name,
           color,
-          brand,
           location,
           itemtype,
           status,
@@ -210,6 +232,11 @@ app.put("/itemsupdate/:itemid", async (req, res) => {
       await query(
         "UPDATE Item_description SET description=? WHERE Itemid = ?",
         [description, itemid]
+      );
+
+      await query(
+        "UPDATE Items_table SET status = ? WHERE Itemid = ?",
+        [status, itemid]
       );
 
       // Commit the transaction

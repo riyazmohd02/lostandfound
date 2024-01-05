@@ -10,7 +10,9 @@ function openMenu() {
   }
 }
 
-
+function home(){
+  window.location.href="../homepage/home_page.html"
+}
 function showConfirmationPopup() {
   var popup = document.getElementById("confirmationPopup");
   popup.style.display = "block";
@@ -54,9 +56,32 @@ function filterItems(searchValue) {
 }
 
 function filterByName() {
-  var searchInputValue = document.getElementById("searchInput").value;
-  filterItems(searchInputValue);
-}
+  // var searchInputValue = document.getElementById("searchInput").value;
+  // filterItems(searchInputValue);
+
+  const searchTerm = document.getElementById('searchInput').value;
+
+    // Fetch items based on the search term
+    fetch(`http://localhost:7000/found?search=${searchTerm}`)
+      .then(response => response.json())
+      .then(data => {
+        displayItems(data); // Assume displayItems is a function that renders items on the UI
+      })
+      .catch(error => {
+        console.error("Error fetching items:", error);
+      });
+  }
+
+  function displayItems(items) {
+    const container = document.getElementById('itemsContainer');
+    container.innerHTML = ''; // Clear previous items
+
+    items.forEach(item => {
+      // Render each item in the container (you can customize this as per your UI design)
+      container.innerHTML += `<div>${item.Item_name} - ${item.description}</div>`;
+    });
+  }
+
 
 
 function reportlost() {

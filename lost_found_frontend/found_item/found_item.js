@@ -78,9 +78,11 @@ document.getElementById('datepicker').setAttribute('max', maxDate);
 
 function validateForm() {
   var category = document.getElementById('category').value;
+  var itemname = document.getElementById('itemname').value;
   var location = document.getElementById('location').value;
   var date = document.getElementById('datepicker').value;
   var description = document.getElementById('description').value;
+  var color = document.getElementById('color').value;
 
 
   document.getElementById('category-error').innerText = "";
@@ -136,7 +138,7 @@ function validateForm() {
       first_name: firstname,
       last_name: lastname,
       category_id: category,
-      Item_name: title,
+      Item_name: itemname,
       itemtype: itemtype,
       description: description,
       location: location,
