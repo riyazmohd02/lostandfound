@@ -15,7 +15,7 @@ app.get("/questions", async (req, res) => {
 });
 
 // GET method to retrieve questions by itemId
-app.get("/questions/byItem/:itemId", async (req, res) => {
+app.get("/quebyItem/:itemId", async (req, res) => {
   try {
     const { itemId } = req.params; // Extracting the itemId from the URL parameter
     console.log("Fetching questions for itemId:", itemId);
@@ -42,18 +42,18 @@ app.post("/questions", async (req, res) => {
     const {
       question_text,
       options,
-      item_id,
-      category_id
+      Itemid,
+      userid
     } = req.body;
     console.log("POST body ", req.body);
 
-    const sql = "INSERT INTO questionForm (question_text, options, Itemid, category_id, created_at) VALUES (?, ?, ?, ?, NOW())";
+    const sql = "INSERT INTO questionForm (question_text, options, Itemid, userid, created_at) VALUES (?, ?, ?, ?, NOW())";
 
     const result = await pool.query(sql, [
       question_text,
       options,
-      item_id,
-      category_id
+      Itemid,
+      userid
     ]);
 
     // console.log("Result:", result); // Log the result to see its structure
@@ -75,7 +75,7 @@ app.post("/questions", async (req, res) => {
 app.put("/questions/:id", async (req, res) => {
   try {
     const { id } = req.params; // Extracting the question ID from the URL parameter
-    const { options } = req.body; // Extracting the updated options from the request body
+    const { options, question_text } = req.body; // Extracting the updated options and question_text from the request body
     console.log("Put Result", req.body);
 
     // Check if the question exists

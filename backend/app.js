@@ -20,10 +20,12 @@ const questionformRouter = require('./question');
 
 app.use('/', signupRouter);
 app.use('/', loginRouter);
-app.use('/',reportitemRouter);
+app.use('/', reportitemRouter);
 app.use('/', questionformRouter);
 
 
 // Start the server
-const PORT = 7000;
-app.listen(PORT, () => console.log(`Server running on:${PORT}`));
+const PORT = process.env.PORT || 7000;
+app.listen(PORT, () => {
+    console.log(`Server running on:${PORT}`)
+});

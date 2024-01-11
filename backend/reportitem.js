@@ -2,9 +2,14 @@ const express = require("express");
 const cors = require('cors');
 const bodyParser = require("body-parser");
 const util = require("util");
+const multer = require('multer');
+const path = require('path');
 const connection = require("./dbconnection");
 
 const app = express();
+
+// Serve static files from the 'uploads' directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Use cors middleware
 app.use(cors());
@@ -14,46 +19,34 @@ const query = util.promisify(connection.query).bind(connection);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// // Multer configuration for handling image uploads
-// const storage = multer.memoryStorage();
-// const upload = multer({ storage: storage });
+
 
 //GET method for all posted items
 app.get("/found", (req, res) => {
-
-  //Extract the search query from the request
-  const searchKeyword = req.query.search;
-
-  // If there's a search keyword, filter by it. Otherwise, fetch all items.
+  try {
+    const searchKeyword = req.query.search;
     let sql = "SELECT * FROM items_table";
     const queryParams = [];
-    
+
     if (searchKeyword) {
-        sql += " WHERE Item_name LIKE ?";
-        const queryParam = `%${searchKeyword}%`; // Using '%' as wildcard to match any substring
-        queryParams.push(queryParam, queryParam);
+      sql += " WHERE Item_name LIKE ?";
+      const queryParam = `%${searchKeyword}%`;
+      queryParams.push(queryParam);
     }
-  connection.query(sql, queryParams, (err, rows) => {
-    if (err) {
-      console.log(err);
-      res.status(500).json({ error: "Internal server error" });
-    } else {
-      console.log('GET details: ', rows);
+
+    connection.query(sql, queryParams, (err, rows) => {
+      if (err) {
+        console.error("Error fetching items:", err);
+        return res.status(500).json({ error: "Internal server error" });
+      }
+      console.log('GET details:', rows);
       res.send(rows);
-    }
-  });
+    });
+  } catch (error) {
+    console.error("Error in GET /found:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
-
-
-// connection.query("SELECT * FROM items_table", (err, rows) => {
-//   if (err) {
-//     console.log(err);
-//     res.status(500).json({ error: "Internal server error" });
-//   } else {
-//     console.log('GET details: ', rows);
-//     res.send(rows);
-//   }
-// });
 
 //GET method by itemtype
 app.get("/items/:itemtype", async (req, res) => {
@@ -96,8 +89,29 @@ app.get("/items/user/:userid", async (req, res) => {
 
 
 
+// Define storage for multer
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'C:/Users/riyaz.M/Desktop/Test_lostandfound/lostandfound/backend/uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 1024 * 1024 * 8 }, // example limit for file size (5MB)
+  fileFilter: (req, file, cb) => {
+    if (file.fieldname === "image_url") {  // Ensure the fieldname matches your POST request field
+      cb(null, true);
+    } else {
+      cb(new Error("Invalid file field name"));
+    }
+  }
+});
+// const upload = multer({ storage: storage }).single('image'); // Assuming the input name is 'image'
 // POST method to insert data into both tables
-app.post("/items", async (req, res) => {
+app.post("/items", upload.array('image_url', 8), async (req, res) => {
   try {
     const {
       userid,
@@ -110,70 +124,55 @@ app.post("/items", async (req, res) => {
       first_name,
       last_name,
       description,
-
     } = req.body;
 
-    // Set default status to 1 for new items
-    const status = 1;
+    const status = 1; // Set default status to 1 for new items
+    //Get the array of image urls from req.files
+    const image_url = req.files.map(file => file.path).join(', ');
 
-    console.log("Item data: ", req.body);
+    // Insert the imageUrls into the database or use as required
+    console.log("Image URLs:", image_url);
 
-    // console.log("Image Buffer: ",req.file);
+    console.log("Item data:", req.body);
 
-    // // Check if a file is uploaded
-    // const imageBuffer = req.file ? req.file.buffer : null;
+    // Start a transaction
+    await query("START TRANSACTION");
 
-    // if (!imageBuffer) {
-    //   return res.status(400).json({ error: 'No file uploaded' });
-    // }
+    // Insert data into Items_table
+    const insertItemResult = await query(
+      "INSERT INTO Items_table (userid, category_id, Item_name, color, location, itemtype,  status, date_found, first_name, last_name, image_url,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?, NOW())",
+      [
+        userid,
+        category_id,
+        Item_name,
+        color,
+        location,
+        itemtype,
+        status,
+        date_found,
+        first_name,
+        last_name,
+        image_url,
+      ]
+    );
 
-    try {
-      // Start a transaction
-      await query("START TRANSACTION");
+    // Get the auto-generated Itemid from the first insert
+    const Itemid = insertItemResult.insertId;
 
-      // Insert data into Items_table
-      const insertItemResult = await query(
-        "INSERT INTO Items_table (userid, category_id, Item_name, color, location, itemtype,  status, date_found, first_name, last_name) VALUES (?,?,?,?,?,?,?,?,?,?)",
-        [
-          userid,
-          category_id,
-          Item_name,
-          color,
-          location,
-          itemtype,
-          status,
-          date_found,
-          first_name,
-          last_name,
-        ]
-      );
+    // Insert data into Item_description
+    await query(
+      "INSERT INTO Item_description (Itemid, description) VALUES (?, ?)",
+      [Itemid, description]
+    );
 
-      // Get the auto-generated Itemid from the first insert
-      const Itemid = insertItemResult.insertId;
+    // Commit the transaction
+    await query("COMMIT");
 
-      // Insert data into Item_description
-      await query(
-        "INSERT INTO Item_description (Itemid, description) VALUES (?, ?)",
-        [Itemid, description]
-      );
-
-      // Handle image upload (save the imageBuffer to your storage solution)
-      // For simplicity, let's assume you save the image to a local file
-      // const imageName = `item_${Itemid}.${req.file.mimetype.split('/')[1]}`;
-      // require("fs").writeFileSync(imageName, imageBuffer);
-
-      // Commit the transaction
-      await query("COMMIT");
-
-      res.json({ message: "Data inserted successfully" });
-    } catch (error) {
-      // Rollback the transaction in case of an error
-      await query("ROLLBACK");
-
-      console.error("Error in POST /items:", error);
-      res.status(500).json({ error: "Internal server error" });
-    }
+    res.json({ message: "Data inserted successfully" });
   } catch (error) {
+    // Rollback the transaction in case of an error
+    await query("ROLLBACK");
+
     console.error("Error in POST /items:", error);
     res.status(500).json({ error: "Internal server error" });
   }
@@ -252,6 +251,33 @@ app.put("/itemsupdate/:itemid", async (req, res) => {
     }
   } catch (error) {
     console.error("Error in PUT /items/:itemid:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// DELETE method to delete data in both tables
+app.delete("/dltitems/:itemid", async (req, res) => {
+  try {
+    const { itemid } = req.params;
+
+    if (!(/^\d+$/.test(itemid))) {
+      return res.status(400).json({ error: "Invalid itemid format" });
+    }
+
+    try {
+      await query("START TRANSACTION");
+      await query("DELETE FROM Item_description WHERE Itemid = ?", [itemid]);
+      await query("DELETE FROM Items_table WHERE Itemid = ?", [itemid]);
+      await query("COMMIT");
+
+      res.json({ message: "Data deleted successfully" });
+    } catch (error) {
+      await query("ROLLBACK");
+      console.error("Error in DELETE /items/:itemid:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  } catch (error) {
+    console.error("Error in DELETE /items/:itemid:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
