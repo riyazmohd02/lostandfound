@@ -95,6 +95,8 @@ function submitshowConfirmationPopup() {
   if (isValid) {
     var popup = document.getElementById('submit_confirmationPopup');
     popup.style.display = 'block';
+    // navigateToNextPage()
+   
   } else {
     var errorPopup1 = document.getElementById('errorPopup1');
     errorPopup1.style.display = 'block';
@@ -104,9 +106,12 @@ function submitshowConfirmationPopup() {
   }
 }
 
+// function navigateToNextPage() {
+//   window.location.href = "../homepage/home_page";
+// }
 
 function ok() {
-  window.location.href = "../home page/home_page.html";
+  window.location.href = "../homepage/home_page.html";
 }
 
 function closePopup() {

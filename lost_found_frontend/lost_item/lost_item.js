@@ -95,7 +95,7 @@ function validateForm() {
     // If all mandatory fields are filled, proceed to the next page
 
     if (isValid) {
-        // navigateToNextPage();
+        navigateToNextPage();
 
         // document.getElementById('submit').setAttribute("onclick", "openPopup()")
 
@@ -178,6 +178,10 @@ function uploadImage2() {
 }
 function uploadImage3() {
     document.getElementById('img3').src = URL.createObjectURL(document.getElementById('file-input3').files[0]);
+}
+
+function navigateToNextPage() {
+    window.location.href = "../homepage/home_page.html";
 }
 
 function openPopup() {
