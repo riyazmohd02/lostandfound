@@ -138,3 +138,14 @@ label {
   margin-top: 10px;
   cursor: pointer;
 }
+
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.login-link a {
+  text-decoration: none;
+  color: #71BAF3;
+  font-weight: bold;
+}

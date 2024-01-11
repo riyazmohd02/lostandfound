@@ -55,30 +55,83 @@ function filterItems(searchValue) {
   });
 }
 
-function filterByName() {
-  // var searchInputValue = document.getElementById("searchInput").value;
-  // filterItems(searchInputValue);
+// function filterByName() {
+//   // var searchInputValue = document.getElementById("searchInput").value;
+//   // filterItems(searchInputValue);
 
+//   const searchTerm = document.getElementById('searchInput').value;
+//    if(searchTerm===null){
+//     fetch(`http://localhost:7000/found`)
+//     .then(response => response.json())
+//     .then(data => {
+//       console.log(searchTerm,"se");
+//       console.log(data,"da");
+//       displayItems(data); // Assume displayItems is a function that renders items on the UI
+//     })
+//     .catch(error => {
+//       console.error("Error fetching items:", error);
+//     });
+//    }
+//    else{
+//     // Fetch items based on the search term
+//     fetch(`http://localhost:7000/found?search=${searchTerm}`)
+//       .then(response => response.json())
+//       .then(data => {
+//         console.log(searchTerm,"se");
+//         console.log(data,"da");
+//         displayItems(data); // Assume displayItems is a function that renders items on the UI
+//       })
+//       .catch(error => {
+//         console.error("Error fetching items:", error);
+//       });
+//     }
+//   }
+
+window.onload = function () {
+  // Call filterByName when the page is loaded
+  filterByName();
+};
+function filterByName() {
   const searchTerm = document.getElementById('searchInput').value;
 
-    // Fetch items based on the search term
-    fetch(`http://localhost:7000/found?search=${searchTerm}`)
+  if (searchTerm === '') {
+    // If the search term is empty, fetch all items
+    fetch('http://localhost:7000/found')
       .then(response => response.json())
       .then(data => {
         displayItems(data); // Assume displayItems is a function that renders items on the UI
       })
       .catch(error => {
-        console.error("Error fetching items:", error);
+        console.error('Error fetching items:', error);
+      });
+  } else {
+    // Fetch items based on the search term
+    fetch(`http://localhost:7000/found?search=${searchTerm}`)
+      .then(response => response.json())
+      .then(data => {
+        
+        displayItems(data); // Assume displayItems is a function that renders items on the UI
+      })
+      .catch(error => {
+        console.error('Error fetching items:', error);
       });
   }
+}
+
+
 
   function displayItems(items) {
     const container = document.getElementById('itemsContainer');
     container.innerHTML = ''; // Clear previous items
-
     items.forEach(item => {
       // Render each item in the container (you can customize this as per your UI design)
-      container.innerHTML += `<div>${item.Item_name} - ${item.description}</div>`;
+      container.innerHTML += `<div class="image-row" >
+      <div class= "image-container">
+      <img src="../Images/noimage.jpg">
+     <b> ${item.Item_name} </b>- ${item.status}
+    
+      </div>
+      </div>`;
     });
   }
 

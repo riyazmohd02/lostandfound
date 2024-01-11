@@ -247,17 +247,31 @@ function showEmailExistsPopup() {
   emailExistsPopup.innerHTML = `
 <div class="popup-content">
   <p>Email already exists.</p>
-  <p>Please use a different email.</p>
-  <button onclick="closeEmailExistsPopup()">OK</button>
+  <button onclick="Login()">Login</button>
+  <button onclick="closeEmailExistsPopup()">Close</button>
 </div>
 `;
   document.body.appendChild(emailExistsPopup);
 }
 
+function Login() {
+  // Remove the email exists popup element
+  const emailExistsPopup = document.querySelector('.popup');
+  if (emailExistsPopup) {
+    emailExistsPopup.remove();
+  }
+  window.location.href = "../login/login.html";
+}
 function closeEmailExistsPopup() {
   // Remove the email exists popup element
   const emailExistsPopup = document.querySelector('.popup');
   if (emailExistsPopup) {
     emailExistsPopup.remove();
   }
+  window.location.href = "../signup/signup.html";
+
+}
+
+function navigateToNextPage() {
+  window.location.href = "../login/login.html";
 }
